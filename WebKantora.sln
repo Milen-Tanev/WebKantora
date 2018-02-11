@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{DD405A01-1999-416B-A948-03DCF1EDBF61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{0D6F43B5-B02B-43E6-AED8-428E638794AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D829DEBD-335B-414A-9015-B1A1594A0969}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebKantora.Data.Common", "Data\WebKantora.Data.Common\WebKantora.Data.Common.csproj", "{CAE4AE16-B7A0-4ED4-B140-F311B72E82A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebKantora.Data.Models", "Data\WebKantora.Data.Models\WebKantora.Data.Models.csproj", "{DB8F6309-F2D2-43F9-A5D2-A3C85CF8F774}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebKantora.Data", "Data\WebKantora.Data\WebKantora.Data.csproj", "{A48117E7-1C1A-4E0E-AD2A-67E5E9725678}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebKantora.Web", "Web\WebKantora.Web\WebKantora.Web.csproj", "{50BBA2FB-097B-4518-9D24-00EC52D74272}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAE4AE16-B7A0-4ED4-B140-F311B72E82A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAE4AE16-B7A0-4ED4-B140-F311B72E82A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAE4AE16-B7A0-4ED4-B140-F311B72E82A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAE4AE16-B7A0-4ED4-B140-F311B72E82A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB8F6309-F2D2-43F9-A5D2-A3C85CF8F774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB8F6309-F2D2-43F9-A5D2-A3C85CF8F774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB8F6309-F2D2-43F9-A5D2-A3C85CF8F774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB8F6309-F2D2-43F9-A5D2-A3C85CF8F774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A48117E7-1C1A-4E0E-AD2A-67E5E9725678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A48117E7-1C1A-4E0E-AD2A-67E5E9725678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A48117E7-1C1A-4E0E-AD2A-67E5E9725678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A48117E7-1C1A-4E0E-AD2A-67E5E9725678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50BBA2FB-097B-4518-9D24-00EC52D74272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50BBA2FB-097B-4518-9D24-00EC52D74272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50BBA2FB-097B-4518-9D24-00EC52D74272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50BBA2FB-097B-4518-9D24-00EC52D74272}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CAE4AE16-B7A0-4ED4-B140-F311B72E82A9} = {DD405A01-1999-416B-A948-03DCF1EDBF61}
+		{DB8F6309-F2D2-43F9-A5D2-A3C85CF8F774} = {DD405A01-1999-416B-A948-03DCF1EDBF61}
+		{A48117E7-1C1A-4E0E-AD2A-67E5E9725678} = {DD405A01-1999-416B-A948-03DCF1EDBF61}
+		{50BBA2FB-097B-4518-9D24-00EC52D74272} = {0D6F43B5-B02B-43E6-AED8-428E638794AE}
+	EndGlobalSection
+EndGlobal
