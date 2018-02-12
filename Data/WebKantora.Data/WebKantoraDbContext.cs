@@ -19,10 +19,18 @@ namespace WebKantora.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Article>()
-                .HasMany<Keyword>(a => a.Keywords);
-            builder.Entity<Keyword>()
-                .HasMany<Article>(k => k.Articles);
+            builder.Entity<KeywordArticle>()
+                .HasKey(ka => new { ka.KeywordId, ka.ArticleId });
+
+            builder.Entity<KeywordArticle>()
+                .HasOne(ka => ka.Keyword)
+                .WithMany(k => k.KeywordArticles)
+                .HasForeignKey(ka => ka.KeywordId);
+
+            builder.Entity<KeywordArticle>()
+                .HasOne(ka => ka.Article)
+                .WithMany(a => a.KeywordArticles)
+                .HasForeignKey(ka => ka.ArticleId);
 
             base.OnModelCreating(builder);
         }

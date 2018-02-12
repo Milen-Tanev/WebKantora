@@ -26,9 +26,9 @@ namespace WebKantora.Data
                     Content = $"keyword{i}"
                 };
                 keywords.Add(keyWord);
-                context.Keywords.Add(keyWord);
-                context.SaveChanges();
             }
+
+            context.AddRange(keywords);
 
             var articles = new List<Article>();
 
@@ -42,16 +42,25 @@ namespace WebKantora.Data
                 };
                 articles.Add(article);
             }
-            
+
+            context.AddRange(articles);
+            context.SaveChanges();
+
+            var kas = new List<KeywordArticle>();
+            var random = new Random();
+
             foreach (var article in articles)
             {
-                foreach (var keyword in keywords)
+                var ka = new KeywordArticle()
                 {
-                    article.Keywords.Add(keyword);
-                }
-                context.Articles.Add(article);
-                context.SaveChanges();
+                    Article = article,
+                    Keyword = keywords[random.Next(0, 4)]
+                };
+                kas.Add(ka);
             }
+
+            context.AddRange(kas);
+            context.SaveChanges();
         }
     }
 }
