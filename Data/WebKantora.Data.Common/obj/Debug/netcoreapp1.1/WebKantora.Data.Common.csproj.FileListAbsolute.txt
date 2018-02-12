@@ -1,7 +1,0 @@
-C:\Users\Milen\documents\visual studio 2017\Projects\WebKantora\Data\WebKantora.Data.Common\bin\Debug\netcoreapp1.1\WebKantora.Data.Common.deps.json
-C:\Users\Milen\documents\visual studio 2017\Projects\WebKantora\Data\WebKantora.Data.Common\bin\Debug\netcoreapp1.1\WebKantora.Data.Common.dll
-C:\Users\Milen\documents\visual studio 2017\Projects\WebKantora\Data\WebKantora.Data.Common\bin\Debug\netcoreapp1.1\WebKantora.Data.Common.pdb
-C:\Users\Milen\documents\visual studio 2017\Projects\WebKantora\Data\WebKantora.Data.Common\obj\Debug\netcoreapp1.1\WebKantora.Data.Common.AssemblyInfo.cs
-C:\Users\Milen\documents\visual studio 2017\Projects\WebKantora\Data\WebKantora.Data.Common\obj\Debug\netcoreapp1.1\WebKantora.Data.Common.dll
-C:\Users\Milen\documents\visual studio 2017\Projects\WebKantora\Data\WebKantora.Data.Common\obj\Debug\netcoreapp1.1\WebKantora.Data.Common.pdb
-C:\Users\Milen\documents\visual studio 2017\Projects\WebKantora\Data\WebKantora.Data.Common\obj\Debug\netcoreapp1.1\WebKantora.Data.Common.csprojResolveAssemblyReference.cache
