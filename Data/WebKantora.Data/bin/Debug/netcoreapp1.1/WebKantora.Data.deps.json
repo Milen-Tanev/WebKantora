@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "cf9bbb316ad0935e375aabe3b9e208b28f6fba38"
+    "signature": "f47747ff8e01dd409049babd50eadd6ff38d9c84"
   },
   "compilationOptions": {},
   "targets": {
@@ -11,7 +11,7 @@
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.1.1",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.1",
           "Microsoft.EntityFrameworkCore.Design": "1.1.1",
-          "Microsoft.EntityFrameworkCore.SqlServer": "1.1.1",
+          "Microsoft.EntityFrameworkCore.SqlServer": "1.1.5",
           "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.5",
           "Microsoft.EntityFrameworkCore.Tools": "1.1.0",
           "WebKantora.Data.Models": "1.0.0"
@@ -216,10 +216,10 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.dll": {}
         }
       },
-      "microsoft.entityframeworkcore.sqlserver/1.1.1": {
+      "microsoft.entityframeworkcore.sqlserver/1.1.5": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "1.1.5",
-          "System.Data.SqlClient": "4.3.0"
+          "System.Data.SqlClient": "4.3.1"
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.SqlServer.dll": {}
@@ -228,7 +228,7 @@
       "microsoft.entityframeworkcore.sqlserver.design/1.1.5": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.5",
-          "Microsoft.EntityFrameworkCore.SqlServer": "1.1.1"
+          "Microsoft.EntityFrameworkCore.SqlServer": "1.1.5"
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.SqlServer.Design.dll": {}
@@ -401,7 +401,7 @@
           "lib/netstandard1.2/System.Data.Common.dll": {}
         }
       },
-      "system.data.sqlclient/4.3.0": {
+      "system.data.sqlclient/4.3.1": {
         "dependencies": {
           "System.Data.Common": "4.3.0",
           "System.Diagnostics.DiagnosticSource": "4.3.1",
@@ -479,7 +479,7 @@
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.1.1",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.1",
           "Microsoft.EntityFrameworkCore.Design": "1.1.1",
-          "Microsoft.EntityFrameworkCore.SqlServer": "1.1.1",
+          "Microsoft.EntityFrameworkCore.SqlServer": "1.1.5",
           "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.5",
           "Microsoft.EntityFrameworkCore.Tools": "1.1.0"
         },
@@ -635,12 +635,12 @@
       "path": "microsoft.entityframeworkcore.relational.design/1.1.5",
       "hashPath": "microsoft.entityframeworkcore.relational.design.1.1.5.nupkg.sha512"
     },
-    "microsoft.entityframeworkcore.sqlserver/1.1.1": {
+    "microsoft.entityframeworkcore.sqlserver/1.1.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ltffbSKAfcVPWy4Ovbm+Qw6Kivmrn7SMWLmOl1mBJDZ+TmI7CSXwclLDunmlqyv2KsA/FGVgulQTe/RU3EgqCg==",
-      "path": "microsoft.entityframeworkcore.sqlserver/1.1.1",
-      "hashPath": "microsoft.entityframeworkcore.sqlserver.1.1.1.nupkg.sha512"
+      "sha512": "sha512-vwF8qeFq3kceOVfvKlgc+hp2m1umnkEBfqgvYSSEegIdTC3LV4e9KndvKQDBUXXs9xxgyKq9GlmyaT5NJ9V4Sw==",
+      "path": "microsoft.entityframeworkcore.sqlserver/1.1.5",
+      "hashPath": "microsoft.entityframeworkcore.sqlserver.1.1.5.nupkg.sha512"
     },
     "microsoft.entityframeworkcore.sqlserver.design/1.1.5": {
       "type": "package",
@@ -810,12 +810,12 @@
       "path": "system.data.common/4.3.0",
       "hashPath": "system.data.common.4.3.0.nupkg.sha512"
     },
-    "system.data.sqlclient/4.3.0": {
+    "system.data.sqlclient/4.3.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-XmWg+/uUcME++m/vsRzxq1fo0GvlYzFfZM5fCqIIDT+O7AwDdpfd1LkRXmcxeTJQTCgx5AN3Y3t5qSz5XxQLVw==",
-      "path": "system.data.sqlclient/4.3.0",
-      "hashPath": "system.data.sqlclient.4.3.0.nupkg.sha512"
+      "sha512": "sha512-FllDZf1liw5++vWf3d73tskt04trlGXb0UwEps/kvGxuKi0QnzcMLmBoXHulzhluvlLg7oIam3+mIsqcxHgj0A==",
+      "path": "system.data.sqlclient/4.3.1",
+      "hashPath": "system.data.sqlclient.4.3.1.nupkg.sha512"
     },
     "system.diagnostics.contracts/4.3.0": {
       "type": "package",

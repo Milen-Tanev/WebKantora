@@ -494,12 +494,12 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.SqlServer/1.1.1": {
+      "Microsoft.EntityFrameworkCore.SqlServer/1.1.5": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "1.1.1",
+          "Microsoft.EntityFrameworkCore.Relational": "1.1.5",
           "NETStandard.Library": "1.6.1",
-          "System.Data.SqlClient": "4.3.0",
+          "System.Data.SqlClient": "4.3.1",
           "System.Threading.Thread": "4.3.0"
         },
         "compile": {
@@ -1374,7 +1374,7 @@
           "lib/netstandard1.2/System.Data.Common.dll": {}
         }
       },
-      "System.Data.SqlClient/4.3.0": {
+      "System.Data.SqlClient/4.3.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -3525,16 +3525,16 @@
         "microsoft.entityframeworkcore.relational.design.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.SqlServer/1.1.1": {
-      "sha512": "ltffbSKAfcVPWy4Ovbm+Qw6Kivmrn7SMWLmOl1mBJDZ+TmI7CSXwclLDunmlqyv2KsA/FGVgulQTe/RU3EgqCg==",
+    "Microsoft.EntityFrameworkCore.SqlServer/1.1.5": {
+      "sha512": "vwF8qeFq3kceOVfvKlgc+hp2m1umnkEBfqgvYSSEegIdTC3LV4e9KndvKQDBUXXs9xxgyKq9GlmyaT5NJ9V4Sw==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlserver/1.1.1",
+      "path": "microsoft.entityframeworkcore.sqlserver/1.1.5",
       "files": [
         "lib/net451/Microsoft.EntityFrameworkCore.SqlServer.dll",
         "lib/net451/Microsoft.EntityFrameworkCore.SqlServer.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.SqlServer.dll",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.SqlServer.xml",
-        "microsoft.entityframeworkcore.sqlserver.1.1.1.nupkg.sha512",
+        "microsoft.entityframeworkcore.sqlserver.1.1.5.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlserver.nuspec"
       ]
     },
@@ -4809,10 +4809,10 @@
         "system.data.common.nuspec"
       ]
     },
-    "System.Data.SqlClient/4.3.0": {
-      "sha512": "XmWg+/uUcME++m/vsRzxq1fo0GvlYzFfZM5fCqIIDT+O7AwDdpfd1LkRXmcxeTJQTCgx5AN3Y3t5qSz5XxQLVw==",
+    "System.Data.SqlClient/4.3.1": {
+      "sha512": "FllDZf1liw5++vWf3d73tskt04trlGXb0UwEps/kvGxuKi0QnzcMLmBoXHulzhluvlLg7oIam3+mIsqcxHgj0A==",
       "type": "package",
-      "path": "system.data.sqlclient/4.3.0",
+      "path": "system.data.sqlclient/4.3.1",
       "files": [
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
@@ -4858,7 +4858,7 @@
         "runtimes/win/lib/net451/System.Data.SqlClient.dll",
         "runtimes/win/lib/net46/System.Data.SqlClient.dll",
         "runtimes/win/lib/netstandard1.3/System.Data.SqlClient.dll",
-        "system.data.sqlclient.4.3.0.nupkg.sha512",
+        "system.data.sqlclient.4.3.1.nupkg.sha512",
         "system.data.sqlclient.nuspec"
       ]
     },
@@ -8855,7 +8855,7 @@
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 1.1.1",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 1.1.1",
       "Microsoft.EntityFrameworkCore.Design >= 1.1.1",
-      "Microsoft.EntityFrameworkCore.SqlServer >= 1.1.1",
+      "Microsoft.EntityFrameworkCore.SqlServer >= 1.1.5",
       "Microsoft.EntityFrameworkCore.SqlServer.Design >= 1.1.5",
       "Microsoft.EntityFrameworkCore.Tools >= 1.1.0",
       "Microsoft.NETCore.App >= 1.1.1"
@@ -8907,7 +8907,7 @@
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
-            "version": "1.1.1"
+            "version": "1.1.5"
           },
           "Microsoft.EntityFrameworkCore.SqlServer.Design": {
             "target": "Package",
