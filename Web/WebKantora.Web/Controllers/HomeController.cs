@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebKantora.Web.Models.ContactViewModels;
 
 namespace WebKantora.Web.Controllers
 {
@@ -28,9 +29,16 @@ namespace WebKantora.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Contact()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact(ContactFormViewModel model)
+        {
+            return this.RedirectToAction("Index", "Home");
         }
 
         public IActionResult Error()

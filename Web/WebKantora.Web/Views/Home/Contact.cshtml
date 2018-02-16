@@ -1,10 +1,51 @@
-﻿@{
-    ViewData["Title"] = "Contact";
+﻿@model ContactFormViewModel
+
+@{
+    ViewData["Title"] = "Пишете ни";
 }
-<h2>@ViewData["Title"].</h2>
+
+<h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<form asp-controller="Home" asp-action="Contact" method="post" class="form-horizontal">
+    <h4>Форма за контакт</h4>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="FirstName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <label asp-for="LastName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <label asp-for="Email" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <label asp-for="PhoneNumber" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <label asp-for="Message" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <textarea asp-for="Message" class="form-control"></textarea>
+            <span asp-validation-for="Message" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">Изпрати</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
