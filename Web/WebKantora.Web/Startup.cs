@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebKantora.Data;
 using WebKantora.Data.Models;
-using WebKantora.Web.Models;
 using WebKantora.Web.Services;
 
 namespace WebKantora.Web

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebKantora.Web</title>
+    <title>@ViewData["Title"] - WebKantora</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -28,13 +28,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">WebKantora.Web</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">WebKantora</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">Какво правим</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Blog">Актуално</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Payment">Цени и начини на плащане</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Пишете ни</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>

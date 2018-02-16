@@ -15,15 +15,21 @@ namespace WebKantora.Web.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            return View();
+        }
 
+        public IActionResult Blog()
+        {
+            return View();
+        }
+
+        public IActionResult Payment()
+        {
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 
