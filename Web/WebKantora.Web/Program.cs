@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace WebKantora.Web
 {
-    public class Program
+    public class Program 
     {
         public static void Main(string[] args)
         {
