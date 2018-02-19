@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+using WebKantora.Data.Models.Contracts;
+
 namespace WebKantora.Data.Models
 {
-    public class Message
+    public class Message: IDeletable
     {
         public Message()
         {

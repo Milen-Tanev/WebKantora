@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using WebKantora.Data.Models.Contracts;
+
 namespace WebKantora.Data.Models
 {
-    public class Article
+    public class Article: IDeletable
     {
         public Article()
         {
             this.Id = Guid.NewGuid();
         }
+
         [Key]
         public Guid Id { get; set; }
 

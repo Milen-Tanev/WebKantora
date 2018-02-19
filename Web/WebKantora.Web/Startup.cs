@@ -6,9 +6,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebKantora.Data;
+using WebKantora.Data.Common;
+using WebKantora.Data.Common.Contracts;
 using WebKantora.Data.Models;
 using WebKantora.Services.Web;
 using WebKantora.Services.Web.Contracts;
+using WebKantora.Web.Infrastructure.Extensions;
 using WebKantora.Web.Services;
 
 namespace WebKantora.Web
@@ -44,6 +47,10 @@ namespace WebKantora.Web
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<WebKantoraDbContext>()
                 .AddDefaultTokenProviders();
+            
+            services.AddTransient(typeof(IWebKantoraDbRepository<>), typeof(WebKantoraDbRepository<>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddDomainServices();
 
             services.AddMvc();
 
@@ -82,7 +89,7 @@ namespace WebKantora.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            // DbInitializer.Initialize(context);
+            //DbInitializer.Initialize(context);
         }
     }
 }
