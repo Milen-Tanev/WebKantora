@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebKantora.Data;
 using WebKantora.Data.Models;
+using WebKantora.Services.Web;
+using WebKantora.Services.Web.Contracts;
 using WebKantora.Web.Services;
 
 namespace WebKantora.Web
@@ -46,6 +48,7 @@ namespace WebKantora.Web
             services.AddMvc();
 
             // Add application services.
+            services.AddTransient<IEmailSenderService, EmailSenderService>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }

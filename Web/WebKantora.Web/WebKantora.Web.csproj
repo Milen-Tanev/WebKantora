@@ -36,6 +36,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Data\WebKantora.Data\WebKantora.Data.csproj" />
+    <ProjectReference Include="..\..\Services\WebKantora.Services.Data\WebKantora.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\WebKantora.Services.Web\WebKantora.Services.Web.csproj" />
   </ItemGroup>
 
 </Project>
