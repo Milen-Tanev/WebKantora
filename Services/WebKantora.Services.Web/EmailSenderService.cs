@@ -15,8 +15,8 @@ namespace WebKantora.Services.Web
             //TODO: get password from database
             try
             {
-                string email = "fromname@domain.com";
-                string password = "password";
+                string email = "webkantoratest@gmail.com";
+                string password = "password-1";
 
                 string SmtpServer = "smtp.gmail.com";
                 int SmtpPort = 587;
