@@ -7,7 +7,7 @@ using WebKantora.Web.Infrastructure.Mappings.Contracts;
 
 namespace WebKantora.Web.Models.ArticleViewModels
 {
-    public class ArticleViewModel: IMapFrom<Article>, ICustomMap
+    public class ArticleViewModel
     {
         public Guid Id { get; set; }
 
@@ -22,11 +22,5 @@ namespace WebKantora.Web.Models.ArticleViewModels
         public string ImageUrl { get; set; }
 
         public ICollection<KeywordArticle> KeywordArticles { get; set; }
-
-        public void CreateMappings(IMapperConfigurationExpression configuration)
-        {
-            configuration.CreateMap<Article, ArticleViewModel>()
-                .ForMember(x => x.Author, opt => opt.MapFrom(x => $"{x.Author.FirstName} {x.Author.LastName}"));
-        }
     }
 }
