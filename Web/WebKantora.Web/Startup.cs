@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.Logging;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System.Reflection;
 using WebKantora.Data;
 using WebKantora.Data.Common;
@@ -53,6 +56,9 @@ namespace WebKantora.Web
             services.AddTransient(typeof(IWebKantoraDbRepository<>), typeof(WebKantoraDbRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddDomainServices();
+            //services.AddSingleton(Mapper.Configuration);
+            //services.AddScoped<IMapper>(sp =>
+            //    new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
 
             services.AddMvc();
 

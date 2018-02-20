@@ -2,7 +2,6 @@
 @using WebKantora.Web.Models.ArticleViewModels
 @using WebKantora.Data.Models
 @model List<ArticleViewModel>
-    
 
 @{
     ViewData["Title"] = "Articles";
@@ -12,7 +11,8 @@
 
 @foreach(var article in Model)
 {
-    <div>@article.Title</div>
+    <div><h3>@Html.ActionLink(@article.Title, "ById", "Blog", new { id = @article.Id }, null)</h3></div>
     <div>By: @article.Author</div>
     <div>@article.Content</div>
+    <div>@article.Date</div>
 }
