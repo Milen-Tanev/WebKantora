@@ -4,6 +4,7 @@ using WebKantora.Services.Web.Contracts;
 using WebKantora.Web.Models.ContactViewModels;
 using MimeKit;
 using WebKantora.Services.Data.Contracts;
+using System.Threading.Tasks;
 
 namespace WebKantora.Web.Controllers
 {
@@ -75,9 +76,19 @@ namespace WebKantora.Web.Controllers
                     }
                 };
 
-                this.emailSenderService.SendEmailForUserRequestAsync(mimeMessage);
+                var result = this.emailSenderService.SendEmailForUserRequest(mimeMessage);
 
-                return this.RedirectToAction("Index", "Home");
+                if(result)
+                {
+                    TempData.Add("SuccessMessage", "Благодарим Ви за запитването!");
+
+                    return this.RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
+
             }
             return this.View(model);
         }

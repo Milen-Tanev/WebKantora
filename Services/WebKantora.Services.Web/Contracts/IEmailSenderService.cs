@@ -6,6 +6,6 @@ namespace WebKantora.Services.Web.Contracts
 {
     public interface IEmailSenderService
     {
-        Task SendEmailForUserRequestAsync(MimeMessage mimeMessage);
+        bool SendEmailForUserRequest(MimeMessage mimeMessage);
     }
 }

@@ -9,8 +9,10 @@ namespace WebKantora.Services.Web
 {
     public class EmailSenderService : IEmailSenderService
     {
-        public Task SendEmailForUserRequestAsync(MimeMessage mimeMessage)
+        //TODO: make async
+        public bool SendEmailForUserRequest(MimeMessage mimeMessage)
         {
+            bool result = false;
             //TODO: extract constants
             //TODO: get password from database
             try
@@ -31,13 +33,15 @@ namespace WebKantora.Services.Web
                     client.Send(mimeMessage);
                     client.Disconnect(true);
                 }
+                result = true;
             }
             catch (Exception ex)
             {
                 string Msg = ex.Message;
+                result = false;
             }
 
-            return Task.FromResult(0);
+            return result;
         }
     }
 }

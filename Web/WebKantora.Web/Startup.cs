@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Session;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System.Reflection;
 using WebKantora.Data;
@@ -61,7 +62,7 @@ namespace WebKantora.Web
             //    new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
             services.AddAutoMapper();
             services.AddMvc();
-
+            services.AddSession();
             // Add application services.
             services.AddTransient<IEmailSenderService, EmailSenderService>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -89,6 +90,7 @@ namespace WebKantora.Web
 
             app.UseIdentity();
 
+            app.UseSession();
             //AutoMapperConfig automapperConfig = new AutoMapperConfig();
             //automapperConfig.Execute(Assembly.GetEntryAssembly());
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
