@@ -17,6 +17,9 @@ namespace WebKantora.Data.Models
         public Guid Id { get; set; }
 
         [Required]
+        public string Title { get; set; }
+
+        [Required]
         public virtual User Author { get; set; }
         
         // DateTime.UtcNow

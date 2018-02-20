@@ -8,9 +8,10 @@ using WebKantora.Data;
 namespace WebKantora.Data.Migrations
 {
     [DbContext(typeof(WebKantoraDbContext))]
-    partial class WebKantoraDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180220145725_Article Title property added")]
+    partial class ArticleTitlepropertyadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.5")

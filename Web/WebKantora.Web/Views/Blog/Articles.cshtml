@@ -1,5 +1,6 @@
 @using System.Collections.Generic
 @using WebKantora.Web.Models.ArticleViewModels
+@using WebKantora.Data.Models
 @model List<ArticleViewModel>
     
 
@@ -11,6 +12,7 @@
 
 @foreach(var article in Model)
 {
+    <div>@article.Title</div>
     <div>By: @article.Author</div>
-    <div>By: @article.Content</div>
+    <div>@article.Content</div>
 }
