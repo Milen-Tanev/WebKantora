@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Reflection;
 using WebKantora.Data;
 using WebKantora.Data.Common;
 using WebKantora.Data.Common.Contracts;
@@ -12,6 +13,7 @@ using WebKantora.Data.Models;
 using WebKantora.Services.Web;
 using WebKantora.Services.Web.Contracts;
 using WebKantora.Web.Infrastructure.Extensions;
+using WebKantora.Web.Infrastructure.Mappings;
 using WebKantora.Web.Services;
 
 namespace WebKantora.Web
@@ -81,6 +83,8 @@ namespace WebKantora.Web
 
             app.UseIdentity();
 
+            AutoMapperConfig automapperConfig = new AutoMapperConfig();
+            automapperConfig.Execute(Assembly.GetEntryAssembly());
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>

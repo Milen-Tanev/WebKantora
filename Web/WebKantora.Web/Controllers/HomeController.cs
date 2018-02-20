@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-using MailKit;
+﻿using Microsoft.AspNetCore.Mvc;
 
 using WebKantora.Services.Web.Contracts;
 using WebKantora.Web.Models.ContactViewModels;
 using MimeKit;
-using Microsoft.AspNetCore.Identity;
 using WebKantora.Services.Data.Contracts;
 
 namespace WebKantora.Web.Controllers

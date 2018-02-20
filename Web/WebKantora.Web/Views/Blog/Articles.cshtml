@@ -1,0 +1,16 @@
+@using System.Collections.Generic
+@using WebKantora.Web.Models.ArticleViewModels
+@model List<ArticleViewModel>
+    
+
+@{
+    ViewData["Title"] = "Articles";
+}
+
+<h2>Articles</h2>
+
+@foreach(var article in Model)
+{
+    <div>By: @article.Author</div>
+    <div>By: @article.Content</div>
+}

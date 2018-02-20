@@ -11,7 +11,15 @@
   <PropertyGroup>
     <UserSecretsId>aspnet-WebKantora.Web-fee34001-b87c-4632-93f4-ef2b46076a66</UserSecretsId>
   </PropertyGroup>
+
   <ItemGroup>
+    <Compile Remove="Views\Articles\**" />
+    <Content Remove="Views\Articles\**" />
+    <EmbeddedResource Remove="Views\Articles\**" />
+    <None Remove="Views\Articles\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.1" />
@@ -38,6 +46,10 @@
     <ProjectReference Include="..\..\Data\WebKantora.Data\WebKantora.Data.csproj" />
     <ProjectReference Include="..\..\Services\WebKantora.Services.Data\WebKantora.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\WebKantora.Services.Web\WebKantora.Services.Web.csproj" />
+    <ProjectReference Include="..\WebKantora.Web.Infrastructure\WebKantora.Web.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Blog\" />
   </ItemGroup>
 
 </Project>
