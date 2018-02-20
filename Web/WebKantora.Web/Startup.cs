@@ -59,7 +59,7 @@ namespace WebKantora.Web
             //services.AddSingleton(Mapper.Configuration);
             //services.AddScoped<IMapper>(sp =>
             //    new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
-
+            services.AddAutoMapper();
             services.AddMvc();
 
             // Add application services.
@@ -89,8 +89,8 @@ namespace WebKantora.Web
 
             app.UseIdentity();
 
-            AutoMapperConfig automapperConfig = new AutoMapperConfig();
-            automapperConfig.Execute(Assembly.GetEntryAssembly());
+            //AutoMapperConfig automapperConfig = new AutoMapperConfig();
+            //automapperConfig.Execute(Assembly.GetEntryAssembly());
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>
