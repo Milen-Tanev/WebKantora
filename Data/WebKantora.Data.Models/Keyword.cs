@@ -5,7 +5,7 @@ using WebKantora.Data.Models.Contracts;
 
 namespace WebKantora.Data.Models
 {
-    public class Keyword: IDeletable
+    public class Keyword: IEntity, IDeletable
     {
         public Keyword()
         {

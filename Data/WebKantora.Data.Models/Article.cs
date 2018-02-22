@@ -6,7 +6,7 @@ using WebKantora.Data.Models.Contracts;
 
 namespace WebKantora.Data.Models
 {
-    public class Article: IDeletable
+    public class Article: IEntity, IDeletable
     {
         public Article()
         {

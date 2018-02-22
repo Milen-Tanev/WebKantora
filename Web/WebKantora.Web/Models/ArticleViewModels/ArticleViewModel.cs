@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using AutoMapper;
+
 using WebKantora.Data.Models;
-using WebKantora.Web.Infrastructure.Mappings.Contracts;
 
 namespace WebKantora.Web.Models.ArticleViewModels
 {

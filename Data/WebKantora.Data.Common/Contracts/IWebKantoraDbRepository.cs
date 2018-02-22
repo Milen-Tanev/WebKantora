@@ -1,21 +1,34 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace WebKantora.Data.Common.Contracts
 {
     public interface IWebKantoraDbRepository<T>
     {
-        void Add(T entity);
+        Task Add(T entity);
 
         IQueryable<T> All();
 
-        T GetById(Guid id);
-        
-        void Delete(T entity);
+        Task<T> GetById(Guid id);
 
-        void Update(T entity);
+        void Update(Guid id, T Entity);
 
-        IQueryable<T> Search(Expression<Func<T, bool>> predicate);
+        Task Delete(Guid id);
+
+        //void Add(T entity);
+
+        //IQueryable<T> All();
+
+        //T GetById(Guid id);
+
+        //void Delete(T entity);
+
+        //void Update(T entity);
+
+        //IQueryable<T> Search(Expression<Func<T, bool>> predicate);
+
+        //Task Add(T entity);
     }
 }

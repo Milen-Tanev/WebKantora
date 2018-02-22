@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+using System.Threading.Tasks;
 using WebKantora.Data.Models;
 
 namespace WebKantora.Services.Data.Contracts
@@ -11,6 +11,6 @@ namespace WebKantora.Services.Data.Contracts
 
         IQueryable GetAll();
 
-        Article GetById(Guid id);
+        Task<Article> GetById(Guid id);
     }
 }

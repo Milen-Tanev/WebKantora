@@ -1,4 +1,5 @@
-﻿using WebKantora.Data.Common.Contracts;
+﻿using System.Threading.Tasks;
+using WebKantora.Data.Common.Contracts;
 
 namespace WebKantora.Data.Common
 {
@@ -11,9 +12,9 @@ namespace WebKantora.Data.Common
             this.context = context;
         }
 
-        public void Commit()
+        public async Task Commit()
         {
-            this.context.SaveChanges();
+            await this.context.SaveChangesAsync();
         }
     }
 }

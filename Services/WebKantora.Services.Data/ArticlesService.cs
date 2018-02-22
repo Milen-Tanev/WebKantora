@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using WebKantora.Data.Common.Contracts;
 using WebKantora.Data.Models;
 using WebKantora.Services.Data.Contracts;
@@ -31,9 +32,9 @@ namespace WebKantora.Services.Data
             return allArticles;
         }
 
-        public Article GetById(Guid id)
+        public async Task<Article> GetById(Guid id)
         {
-            var article = this.articles.GetById(id);
+            var article = await this.articles.GetById(id);
             return article;
         }
     }

@@ -1,0 +1,12 @@
+@using WebKantora.Web.Models.ArticleViewModels
+
+@model ArticleViewModel
+
+@{
+    ViewData["Title"] = "ById";
+}
+
+<h2>@Model.Title</h2>
+<h4>By: @Model.Author</h4>
+<div>@Model.Date</div>
+<div>@Model.Content</div>

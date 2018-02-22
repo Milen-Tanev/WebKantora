@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 using WebKantora.Data.Models.Contracts;
+using System;
 
 namespace WebKantora.Data.Models
 {
-    public class User: IdentityUser, IDeletable
+    public class User: IdentityUser, IEntity, IDeletable
     {
         public User()
         {
@@ -23,5 +24,7 @@ namespace WebKantora.Data.Models
 
         [Required]
         public bool IsDeleted { get; set; }
+
+        Guid IEntity.Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }
