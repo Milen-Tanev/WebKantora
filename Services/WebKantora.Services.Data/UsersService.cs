@@ -19,11 +19,10 @@ namespace WebKantora.Services.Data
 
         public User GetByUserName(string userName)
         {
-            //var user = this.users.All()
-            //    .Where(u => u.UserName == userName)
-            //    .FirstOrDefault();
-            //return user;
-            return null;
+            var user = this.users.All()
+                .Where(u => u.UserName == userName)
+                .FirstOrDefault();
+            return user;
         }
     }
 }

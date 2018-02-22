@@ -27,6 +27,6 @@ namespace WebKantora.Web.Models.ContactViewModels
         //TODO: Min/Max Length
         [Required]
         [Display(Name = "Съобщение")]
-        public string Message { get; set; }
+        public string Content { get; set; }
     }
 }

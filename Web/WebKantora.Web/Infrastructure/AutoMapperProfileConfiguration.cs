@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using WebKantora.Data.Models;
 using WebKantora.Web.Models.ArticleViewModels;
+using WebKantora.Web.Models.ContactViewModels;
 
 namespace WebKantora.Web.Infrastructure
 {
@@ -16,6 +17,8 @@ namespace WebKantora.Web.Infrastructure
         {
             CreateMap<Article, ArticleViewModel>()
                 .ForMember(x => x.Author, opt => opt.MapFrom(x => $"{x.Author.FirstName} {x.Author.LastName}"));
+            CreateMap<ContactFormViewModel, Message>()
+                .ForMember(x => x.AuthorName, opt => opt.MapFrom(x => $"{x.FirstName} {x.LastName}"));
         }
     }
 }

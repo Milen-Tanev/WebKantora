@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Reflection;
+
 using WebKantora.Data.Common.Contracts;
-using WebKantora.Data.Models;
 using WebKantora.Services.Data.Contracts;
 
 namespace WebKantora.Web.Infrastructure.Extensions
@@ -24,6 +24,7 @@ namespace WebKantora.Web.Infrastructure.Extensions
 
             return services;
         }
+
         public static IServiceCollection AddRepositoryServices(this IServiceCollection services)
         {
             var assembly = typeof(IArticleDbRepository).GetTypeInfo().Assembly;

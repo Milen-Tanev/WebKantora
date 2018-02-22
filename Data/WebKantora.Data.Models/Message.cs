@@ -17,10 +17,12 @@ namespace WebKantora.Data.Models
 
         public virtual User Author { get; set; }
 
-        //MinLength, MaxLength?
-        [Required]
-        public string Title { get; set; }
+        public string AuthorName { get; set; }
 
+        public string Email { get; set; }
+
+        public string PhoneNumber { get; set; }
+        
         [Required]
         public string Content { get; set; }
 

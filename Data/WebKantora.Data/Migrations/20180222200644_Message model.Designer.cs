@@ -8,9 +8,10 @@ using WebKantora.Data;
 namespace WebKantora.Data.Migrations
 {
     [DbContext(typeof(WebKantoraDbContext))]
-    partial class WebKantoraDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180222200644_Message model")]
+    partial class Messagemodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.5")
@@ -197,6 +198,9 @@ namespace WebKantora.Data.Migrations
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

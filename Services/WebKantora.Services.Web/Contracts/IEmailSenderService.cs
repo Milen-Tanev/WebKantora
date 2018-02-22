@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-using MimeKit;
+﻿using MimeKit;
 
 namespace WebKantora.Services.Web.Contracts
 {

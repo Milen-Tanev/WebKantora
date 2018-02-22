@@ -13,12 +13,12 @@ namespace WebKantora.Web.Controllers
     public class BlogController: Controller
     {
         private IArticlesService articlesService;
-        //private IMapper mapper;
+        private IMapper mapper;
 
-        public BlogController(IArticlesService articlesService/*, IMapper mapper*/)
+        public BlogController(IArticlesService articlesService, IMapper mapper)
         {
             this.articlesService = articlesService;
-            //this.mapper = mapper;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -33,7 +33,7 @@ namespace WebKantora.Web.Controllers
         public async Task<ActionResult> ById(Guid id)
         {
             var article = await this.articlesService.GetById(id);
-            var viewModel = Mapper.Map<ArticleViewModel>(article);
+            var viewModel = this.mapper.Map<ArticleViewModel>(article);
 
             return this.View(viewModel);
         }
