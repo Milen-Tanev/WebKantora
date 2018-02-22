@@ -54,12 +54,10 @@ namespace WebKantora.Web
                 .AddEntityFrameworkStores<WebKantoraDbContext>()
                 .AddDefaultTokenProviders();
             
-            services.AddTransient(typeof(IWebKantoraDbRepository<>), typeof(WebKantoraDbRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddDomainServices();
-            //services.AddSingleton(Mapper.Configuration);
-            //services.AddScoped<IMapper>(sp =>
-            //    new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
+            services.AddRepositoryServices();
+
             services.AddAutoMapper();
             services.AddMvc();
             services.AddSession();

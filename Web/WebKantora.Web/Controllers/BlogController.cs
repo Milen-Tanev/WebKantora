@@ -6,6 +6,7 @@ using System.Linq;
 using WebKantora.Web.Infrastructure.Mappings;
 using WebKantora.Services.Data.Contracts;
 using WebKantora.Web.Models.ArticleViewModels;
+using System.Threading.Tasks;
 
 namespace WebKantora.Web.Controllers
 {
@@ -29,9 +30,9 @@ namespace WebKantora.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ById(Guid id)
+        public async Task<ActionResult> ById(Guid id)
         {
-            var article = this.articlesService.GetById(id);
+            var article = await this.articlesService.GetById(id);
             var viewModel = Mapper.Map<ArticleViewModel>(article);
 
             return this.View(viewModel);

@@ -9,10 +9,10 @@ namespace WebKantora.Services.Data
 {
     public class ArticlesService : IArticlesService
     {
-        private IWebKantoraDbRepository<Article> articles;
+        private IArticleDbRepository articles;
         private IUnitOfWork unitOfWork;
 
-        public ArticlesService(IWebKantoraDbRepository<Article> articles, IUnitOfWork unitOfWork)
+        public ArticlesService(IArticleDbRepository articles, IUnitOfWork unitOfWork)
         {
             this.articles = articles;
             this.unitOfWork = unitOfWork;

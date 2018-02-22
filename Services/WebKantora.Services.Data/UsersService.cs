@@ -8,10 +8,10 @@ namespace WebKantora.Services.Data
 {
     public class UsersService : IUsersService
     {
-        private IWebKantoraDbRepository<User> users;
+        private IUserDbRepository users;
         private IUnitOfWork unitOfWork;
 
-        public UsersService(IWebKantoraDbRepository<User> users, IUnitOfWork unitOfWork)
+        public UsersService(IUserDbRepository users, IUnitOfWork unitOfWork)
         {
             this.users = users;
             this.unitOfWork = unitOfWork;
@@ -19,10 +19,11 @@ namespace WebKantora.Services.Data
 
         public User GetByUserName(string userName)
         {
-            var user = this.users.All()
-                .Where(u => u.UserName == userName)
-                .FirstOrDefault();
-            return user;
+            //var user = this.users.All()
+            //    .Where(u => u.UserName == userName)
+            //    .FirstOrDefault();
+            //return user;
+            return null;
         }
     }
 }
