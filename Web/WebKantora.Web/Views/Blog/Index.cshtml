@@ -11,7 +11,7 @@
 
 @foreach(var article in Model)
 {
-    <div><h3>@Html.ActionLink(@article.Title, "ById", "Blog", new { id = @article.Id }, null)</h3></div>
+    <h3><a asp-area="" asp-controller="Blog" asp-action="ById" asp-route-id="@article.Id">@article.Title</a></h3>
     <div>By: @article.Author</div>
     <div>@article.Content</div>
     <div>@article.Date</div>

@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using AutoMapper;
+using MimeKit;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+
+using WebKantora.Data.Models;
 using WebKantora.Services.Web.Contracts;
 using WebKantora.Services.Data.Contracts;
 using WebKantora.Web.Models.ContactViewModels;
-using AutoMapper;
-using WebKantora.Data.Models;
-using MimeKit;
 
 namespace WebKantora.Web.Controllers
 {
@@ -51,7 +49,6 @@ namespace WebKantora.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //TODO: fill form if user is logged + thank you message
                 string subject = $"Запитване от {model.FirstName} {model.LastName}";
                 string messageText = $"{model.FirstName} {model.LastName}\nemail: {model.Email}\nphone number: {model.PhoneNumber}\nmessage: {model.Content}";
 
@@ -70,15 +67,6 @@ namespace WebKantora.Web.Controllers
                 {
                     TempData.Add("SuccessMessage", "Благодарим Ви за запитването!");
 
-                    //var message = new Message()
-                    //{
-                    //    Id = new Guid(),
-                    //    AuthorName = $"{model.FirstName} {model.LastName}",
-                    //    Email = model.Email,
-                    //    PhoneNumber = model.PhoneNumber,
-                    //    Content = model.Content
-                    //};
-
                     var message = this.mapper.Map<Message>(model);
 
                     if (User.Identity.IsAuthenticated)
@@ -92,8 +80,7 @@ namespace WebKantora.Web.Controllers
                 }
                 else
                 {
-                    return this.RedirectToAction("Index", "Home");
-                    //return this.BadRequest();
+                    return this.BadRequest();
                 }
             }
             

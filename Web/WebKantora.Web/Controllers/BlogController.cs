@@ -22,7 +22,7 @@ namespace WebKantora.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Articles()
+        public ActionResult Index()
         {
             var viewModel = this.articlesService.GetAll().To<ArticleViewModel>().ToList();
             
