@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WebKantora.Data.Migrations
 {
-    public partial class Initialmigration : Migration
+    public partial class Userauthor : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +38,19 @@ namespace WebKantora.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Keywords",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Content = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Keywords", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -45,6 +59,9 @@ namespace WebKantora.Data.Migrations
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
@@ -148,40 +165,6 @@ namespace WebKantora.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Messages",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    AuthorId = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    Title = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Messages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Messages_AspNetUsers_AuthorId",
-                        column: x => x.AuthorId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Keywords",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    ArticleId = table.Column<Guid>(nullable: true),
-                    Content = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Keywords", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Articles",
                 columns: table => new
                 {
@@ -191,7 +174,7 @@ namespace WebKantora.Data.Migrations
                     Date = table.Column<DateTime>(nullable: false),
                     ImageUrl = table.Column<string>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    KeywordId = table.Column<Guid>(nullable: true)
+                    Title = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -202,12 +185,55 @@ namespace WebKantora.Data.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    AuthorId = table.Column<string>(nullable: false),
+                    AuthorName = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    Id = table.Column<Guid>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.AuthorId);
+                    table.UniqueConstraint("AK_Messages_Id", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Articles_Keywords_KeywordId",
+                        name: "FK_Messages_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "KeywordArticle",
+                columns: table => new
+                {
+                    KeywordId = table.Column<Guid>(nullable: false),
+                    ArticleId = table.Column<Guid>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_KeywordArticle", x => new { x.KeywordId, x.ArticleId });
+                    table.ForeignKey(
+                        name: "FK_KeywordArticle_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "Articles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_KeywordArticle_Keywords_KeywordId",
                         column: x => x.KeywordId,
                         principalTable: "Keywords",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -242,19 +268,9 @@ namespace WebKantora.Data.Migrations
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Articles_KeywordId",
-                table: "Articles",
-                column: "KeywordId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Keywords_ArticleId",
-                table: "Keywords",
+                name: "IX_KeywordArticle_ArticleId",
+                table: "KeywordArticle",
                 column: "ArticleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Messages_AuthorId",
-                table: "Messages",
-                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -266,26 +282,10 @@ namespace WebKantora.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Keywords_Articles_ArticleId",
-                table: "Keywords",
-                column: "ArticleId",
-                principalTable: "Articles",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Articles_AspNetUsers_AuthorId",
-                table: "Articles");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Articles_Keywords_KeywordId",
-                table: "Articles");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -302,19 +302,22 @@ namespace WebKantora.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "KeywordArticle");
+
+            migrationBuilder.DropTable(
                 name: "Messages");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Articles");
 
             migrationBuilder.DropTable(
                 name: "Keywords");
 
             migrationBuilder.DropTable(
-                name: "Articles");
+                name: "AspNetUsers");
         }
     }
 }

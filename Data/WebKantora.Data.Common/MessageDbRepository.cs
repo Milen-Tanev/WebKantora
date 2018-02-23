@@ -39,7 +39,7 @@ namespace WebKantora.Data.Common
         public async Task<Message> GetById(Guid id)
         {
             return await this.DbSet
-                .Include(e => e.Author)
+                //.Include(e => e.AuthorId)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 

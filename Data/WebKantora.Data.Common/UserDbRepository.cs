@@ -26,7 +26,7 @@ namespace WebKantora.Data.Common
 
         public IQueryable<User> All()
         {
-            return this.DbSet.AsNoTracking();
+            return this.DbSet.AsQueryable();
         }
 
         public async Task Delete(string id)
@@ -40,6 +40,13 @@ namespace WebKantora.Data.Common
             return await this.DbSet
                 .Include(e => e.Messages)
                 .FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task<User> GetByUserName(string userName)
+        {
+            return await this.DbSet
+                .Include(e => e.Messages)
+                .FirstOrDefaultAsync(e => e.UserName == userName);
         }
 
         public void Update(string id, User entity)

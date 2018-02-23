@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using WebKantora.Data.Common.Contracts;
 using WebKantora.Data.Models;
 using WebKantora.Services.Data.Contracts;
@@ -18,7 +19,14 @@ namespace WebKantora.Services.Data
 
         public async Task Add(Message message)
         {
-            await this.messages.Add(message);
+            try
+            {
+                await this.messages.Add(message);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
             await this.unitOfWork.Commit();
         }
     }

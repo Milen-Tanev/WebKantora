@@ -15,6 +15,8 @@ namespace WebKantora.Data.Common.Contracts
 
         Task Delete(string id);
 
+        Task<User> GetByUserName(string userName);
+
         void Update(string id, User entity);
     }
 }

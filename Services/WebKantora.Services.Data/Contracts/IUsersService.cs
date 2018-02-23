@@ -1,9 +1,10 @@
-﻿using WebKantora.Data.Models;
+﻿using System.Threading.Tasks;
+using WebKantora.Data.Models;
 
 namespace WebKantora.Services.Data.Contracts
 {
     public interface IUsersService
     {
-        User GetByUserName(string userName);
+        Task<User> GetByUserName(string userName);
     }
 }

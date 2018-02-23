@@ -8,8 +8,8 @@ using WebKantora.Data;
 namespace WebKantora.Data.Migrations
 {
     [DbContext(typeof(WebKantoraDbContext))]
-    [Migration("20180211204523_Initial migration")]
-    partial class Initialmigration
+    [Migration("20180223104917_User author")]
+    partial class Userauthor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -141,13 +141,12 @@ namespace WebKantora.Data.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<Guid?>("KeywordId");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("KeywordId");
 
                     b.ToTable("Articles");
                 });
@@ -157,36 +156,51 @@ namespace WebKantora.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("ArticleId");
-
-                    b.Property<string>("Content")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.ToTable("Keywords");
-                });
-
-            modelBuilder.Entity("WebKantora.Data.Models.Message", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AuthorId");
-
                     b.Property<string>("Content")
                         .IsRequired();
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Title")
-                        .IsRequired();
-
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.ToTable("Keywords");
+                });
+
+            modelBuilder.Entity("WebKantora.Data.Models.KeywordArticle", b =>
+                {
+                    b.Property<Guid>("KeywordId");
+
+                    b.Property<Guid>("ArticleId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.HasKey("KeywordId", "ArticleId");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("KeywordArticle");
+                });
+
+            modelBuilder.Entity("WebKantora.Data.Models.Message", b =>
+                {
+                    b.Property<string>("AuthorId");
+
+                    b.Property<string>("AuthorName");
+
+                    b.Property<string>("Content")
+                        .IsRequired();
+
+                    b.Property<string>("Email");
+
+                    b.Property<Guid>("Id");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.HasKey("AuthorId");
+
+                    b.HasAlternateKey("Id");
 
                     b.ToTable("Messages");
                 });
@@ -205,6 +219,14 @@ namespace WebKantora.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -284,24 +306,27 @@ namespace WebKantora.Data.Migrations
                         .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("WebKantora.Data.Models.Keyword")
-                        .WithMany("Articles")
-                        .HasForeignKey("KeywordId");
                 });
 
-            modelBuilder.Entity("WebKantora.Data.Models.Keyword", b =>
+            modelBuilder.Entity("WebKantora.Data.Models.KeywordArticle", b =>
                 {
-                    b.HasOne("WebKantora.Data.Models.Article")
-                        .WithMany("Keywords")
-                        .HasForeignKey("ArticleId");
+                    b.HasOne("WebKantora.Data.Models.Article", "Article")
+                        .WithMany("KeywordArticles")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("WebKantora.Data.Models.Keyword", "Keyword")
+                        .WithMany("KeywordArticles")
+                        .HasForeignKey("KeywordId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WebKantora.Data.Models.Message", b =>
                 {
                     b.HasOne("WebKantora.Data.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
+                        .WithMany("Messages")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

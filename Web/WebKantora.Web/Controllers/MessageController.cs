@@ -28,14 +28,14 @@ namespace WebKantora.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var model = new ContactFormViewModel();
 
             if (User.Identity.IsAuthenticated)
             {
                 var userName = this.HttpContext.User.Identity.Name;
-                var currentUser = this.usersService.GetByUserName(userName);
+                var currentUser = await this.usersService.GetByUserName(userName);
 
                 model.FirstName = currentUser.FirstName;
                 model.LastName = currentUser.LastName;
@@ -70,11 +70,18 @@ namespace WebKantora.Web.Controllers
                 {
                     TempData.Add("SuccessMessage", "Благодарим Ви за запитването!");
 
-                    var message = this.mapper.Map<Message>(model);
+                    var message = new Message()
+                    {
+                        Id = new Guid(),
+                        AuthorName = $"{model.FirstName} {model.LastName}",
+                        Email = model.Email,
+                        PhoneNumber = model.PhoneNumber,
+                        Content = model.Content
+                    };
 
                     if (User.Identity.IsAuthenticated)
                     {
-                        var user = this.usersService.GetByUserName(User.Identity.Name);
+                        var user = await this.usersService.GetByUserName(User.Identity.Name);
                         message.Author = user;
                     }
 
@@ -83,7 +90,8 @@ namespace WebKantora.Web.Controllers
                 }
                 else
                 {
-                    return this.BadRequest();
+                    return this.RedirectToAction("Index", "Home");
+                    //return this.BadRequest();
                 }
             }
             

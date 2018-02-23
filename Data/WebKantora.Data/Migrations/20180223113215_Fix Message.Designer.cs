@@ -8,8 +8,8 @@ using WebKantora.Data;
 namespace WebKantora.Data.Migrations
 {
     [DbContext(typeof(WebKantoraDbContext))]
-    [Migration("20180222200644_Message model")]
-    partial class Messagemodel
+    [Migration("20180223113215_Fix Message")]
+    partial class FixMessage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -198,9 +198,6 @@ namespace WebKantora.Data.Migrations
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("PhoneNumber");
-
-                    b.Property<string>("Title")
-                        .IsRequired();
 
                     b.HasKey("Id");
 

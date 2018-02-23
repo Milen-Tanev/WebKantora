@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-
+using System.Threading.Tasks;
 using WebKantora.Data.Common.Contracts;
 using WebKantora.Data.Models;
 using WebKantora.Services.Data.Contracts;
@@ -17,11 +17,9 @@ namespace WebKantora.Services.Data
             this.unitOfWork = unitOfWork;
         }
 
-        public User GetByUserName(string userName)
+        public async Task<User> GetByUserName(string userName)
         {
-            var user = this.users.All()
-                .Where(u => u.UserName == userName)
-                .FirstOrDefault();
+            var user = await this.users.GetByUserName(userName);
             return user;
         }
     }
