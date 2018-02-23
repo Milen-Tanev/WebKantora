@@ -70,14 +70,16 @@ namespace WebKantora.Web.Controllers
                 {
                     TempData.Add("SuccessMessage", "Благодарим Ви за запитването!");
 
-                    var message = new Message()
-                    {
-                        Id = new Guid(),
-                        AuthorName = $"{model.FirstName} {model.LastName}",
-                        Email = model.Email,
-                        PhoneNumber = model.PhoneNumber,
-                        Content = model.Content
-                    };
+                    //var message = new Message()
+                    //{
+                    //    Id = new Guid(),
+                    //    AuthorName = $"{model.FirstName} {model.LastName}",
+                    //    Email = model.Email,
+                    //    PhoneNumber = model.PhoneNumber,
+                    //    Content = model.Content
+                    //};
+
+                    var message = this.mapper.Map<Message>(model);
 
                     if (User.Identity.IsAuthenticated)
                     {
