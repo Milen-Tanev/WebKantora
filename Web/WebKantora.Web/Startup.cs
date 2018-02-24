@@ -99,7 +99,7 @@ namespace WebKantora.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            //DbInitializer.Initialize(context);
+            //DbInitializer.Initialize(context, app);
         }
     }
 }

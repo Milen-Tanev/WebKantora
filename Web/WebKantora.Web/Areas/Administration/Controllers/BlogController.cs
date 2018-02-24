@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebKantora.Web.Areas.Administration.Models.BlogViewModels;
 
 namespace WebKantora.Web.Areas.Administration.Controllers
 {
     [Area("Administration")]
+    [Authorize(Roles = "Admin")]
     public class BlogController : Controller
     {
         // GET: Blog
@@ -16,14 +19,8 @@ namespace WebKantora.Web.Areas.Administration.Controllers
             return View();
         }
 
-        // GET: Blog/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Blog/Create
-        public ActionResult Create()
+        public ActionResult CreateArticle()
         {
             return View();
         }
@@ -31,12 +28,11 @@ namespace WebKantora.Web.Areas.Administration.Controllers
         // POST: Blog/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult CreateArticle(CreateArticleViewModel model)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                
                 return RedirectToAction("Index");
             }
             catch
@@ -44,7 +40,7 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                 return View();
             }
         }
-
+/*
         // GET: Blog/Edit/5
         public ActionResult Edit(int id)
         {
@@ -90,5 +86,6 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                 return View();
             }
         }
+        */
     }
 }
