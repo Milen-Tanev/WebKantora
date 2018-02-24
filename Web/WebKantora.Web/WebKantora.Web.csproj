@@ -54,5 +54,9 @@
     <ProjectReference Include="..\..\Services\WebKantora.Services.Web\WebKantora.Services.Web.csproj" />
     <ProjectReference Include="..\WebKantora.Web.Infrastructure\WebKantora.Web.Infrastructure.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Controllers\" />
+    <Folder Include="Areas\Administration\Models\" />
+  </ItemGroup>
 
 </Project>
