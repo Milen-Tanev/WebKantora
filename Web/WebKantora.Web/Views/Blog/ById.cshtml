@@ -10,3 +10,11 @@
 <h4>By: @Model.Author</h4>
 <div>@Model.Date</div>
 <div>@Model.Content</div>
+
+<div class="fb-share-button" data-href="http://localhost:65034/Blog/ById/" +@Model.Id data-layout="button_count" data-size="small" data-mobile-iframe="true">
+    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+</div>
+
+@section Scripts {
+    <script src="~/js/facebookShare.js"></script>
+}
