@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Arial Narrow';
+    font-size: 185%;
 }
 
 /* Wrapping element */
@@ -82,9 +84,13 @@ textarea {
     font-weight: bold;
 }
 
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    } 
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ul.pager>li>a{
+    border-radius: 0px;
+}

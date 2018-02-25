@@ -16,7 +16,8 @@ namespace WebKantora.Web.Infrastructure
             :base(profileName)
         {
             CreateMap<Article, ArticleViewModel>()
-                .ForMember(x => x.Author, opt => opt.MapFrom(x => $"{x.Author.FirstName} {x.Author.LastName}"));
+                .ForMember(x => x.Author, opt => opt.MapFrom(x => $"{x.Author.FirstName} {x.Author.LastName}"))
+                .ForMember(x => x.Content, opt => opt.MapFrom(x => $"{x.Content.Substring(0, 200)}..."));
             CreateMap<ContactFormViewModel, Message>()
                 .ForMember(x => x.AuthorName, opt => opt.MapFrom(x => $"{x.FirstName} {x.LastName}"));
         }

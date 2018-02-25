@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations;
 using WebKantora.Data.Models;
 
 namespace WebKantora.Web.Models.ArticleViewModels

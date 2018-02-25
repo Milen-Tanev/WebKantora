@@ -25,6 +25,7 @@ namespace WebKantora.Web.Controllers
         [HttpGet]
         public ActionResult Index(int page = 1)
         {
+            // Keyword[] parameter
             var viewModel = this.articlesService.GetAll().To<ArticleViewModel>().ToPagedList(page, 3);
             
             return this.View(viewModel);
