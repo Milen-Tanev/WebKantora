@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using PagedList.Core;
 
 using WebKantora.Web.Infrastructure.Mappings;
 using WebKantora.Services.Data.Contracts;
@@ -22,9 +23,9 @@ namespace WebKantora.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int pageNumber = 1)
         {
-            var viewModel = this.articlesService.GetAll().To<ArticleViewModel>().ToList();
+            var viewModel = this.articlesService.GetAll().To<ArticleViewModel>().ToPagedList<ArticleViewModel>(pageNumber, 1);
             
             return this.View(viewModel);
         }

@@ -1,7 +1,9 @@
-@using System.Collections.Generic
+@using PagedList.Core
+@using PagedList.Core.Mvc
 @using WebKantora.Web.Models.ArticleViewModels
 @using WebKantora.Data.Models
-@model List<ArticleViewModel>
+@addTagHelper *, PagedList.Core.Mvc
+@model IPagedList<ArticleViewModel>
 
 @{
     ViewData["Title"] = "Articles";
@@ -16,3 +18,8 @@
     <div>@article.Content</div>
     <div>@article.Date</div>
 }
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+<pager class="pager-container" list="@Model" options="@PagedListRenderOptions.TwitterBootstrapPager" asp-action="Index" asp-controller="Blog" asp-route-pageNumber="5" />
