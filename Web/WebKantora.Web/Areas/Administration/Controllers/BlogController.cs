@@ -32,12 +32,12 @@ namespace WebKantora.Web.Areas.Administration.Controllers
         {
             try
             {
-                
+                var fileName = model.Content.FileName;
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                return View(model);
             }
         }
 /*

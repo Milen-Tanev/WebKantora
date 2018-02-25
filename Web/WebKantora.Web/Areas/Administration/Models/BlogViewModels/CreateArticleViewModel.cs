@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,9 +17,10 @@ namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
         //TODO: Min/Max Length
         [Required]
         [Display(Name = "Текст")]
-        public string Content { get; set; }
+        public IFormFile Content { get; set; }
+        //public string Content { get; set; }
 
-        public string ImageUrl { get; set; }
+        //public string ImageUrl { get; set; }
 
         public ICollection<string> Keywords { get; set; }
     }

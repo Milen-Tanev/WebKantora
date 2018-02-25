@@ -6,27 +6,26 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-area="Administration" asp-controller="Blog" asp-action="CreateArticle" method="post" class="form-horizontal">
+<form asp-area="Administration" asp-controller="Blog" asp-action="CreateArticle" method="post" enctype="multipart/form-data" class="form-horizontal">
     <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="Title" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            @*<input asp-for="Title" class="form-control" value=@Model.Title />*@
-            <input class="form-control" />
+            <input asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-        <label asp-for="Content" class="col-md-2 control-label"></label>
+        <label asp-for="Content" class="col-md-2 control-label">Текстов файл</label>
         <div class="col-md-10">
-            <textarea asp-for="Content" class="form-control"></textarea>
+            <input asp-for="Content" type="file" />
+            @*<textarea asp-for="Content" class="form-control"></textarea>*@
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
-        <h3>Как да се добавят снимките</h3>
         <h3>Как да се добавят ключовите думи</h3>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Изпрати</button>
+            <button type="submit" class="btn btn-default" value="Upload">Изпрати</button>
         </div>
     </div>
 </form>
