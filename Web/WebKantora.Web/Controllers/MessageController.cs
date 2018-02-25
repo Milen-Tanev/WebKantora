@@ -1,4 +1,4 @@
-using AutoMapper;
+п»їusing AutoMapper;
 using MimeKit;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -49,7 +49,7 @@ namespace WebKantora.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                string subject = $"Запитване от {model.FirstName} {model.LastName}";
+                string subject = $"Р—Р°РїРёС‚РІР°РЅРµ РѕС‚ {model.FirstName} {model.LastName}";
                 string messageText = $"{model.FirstName} {model.LastName}\nemail: {model.Email}\nphone number: {model.PhoneNumber}\nmessage: {model.Content}";
 
                 var mimeMessage = new MimeMessage()
@@ -65,7 +65,7 @@ namespace WebKantora.Web.Controllers
 
                 if (result)
                 {
-                    TempData.Add("SuccessMessage", "Благодарим Ви за запитването!");
+                    TempData.Add("SuccessMessage", "Р‘Р»Р°РіРѕРґР°СЂРёРј Р’Рё Р·Р° Р·Р°РїРёС‚РІР°РЅРµС‚Рѕ!");
 
                     var message = this.mapper.Map<Message>(model);
 

@@ -17,8 +17,8 @@ namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
         //TODO: Min/Max Length
         [Required]
         [Display(Name = "Текст")]
-        public IFormFile Content { get; set; }
-        //public string Content { get; set; }
+        public IFormFile ArticleContent { get; set; }
+        //public string ArticleContent { get; set; }
 
         //public string ImageUrl { get; set; }
 

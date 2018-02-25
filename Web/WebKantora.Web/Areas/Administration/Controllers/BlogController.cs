@@ -5,7 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebKantora.Web.Infrastructure;
 using WebKantora.Web.Areas.Administration.Models.BlogViewModels;
+using AutoMapper;
+using WebKantora.Services.Data.Contracts;
+using WebKantora.Data.Models;
 
 namespace WebKantora.Web.Areas.Administration.Controllers
 {
@@ -13,6 +17,17 @@ namespace WebKantora.Web.Areas.Administration.Controllers
     [Authorize(Roles = "Admin")]
     public class BlogController : Controller
     {
+        private IUsersService usersService;
+        private IArticlesService articlesService;
+        private IMapper mapper;
+
+        public BlogController(IUsersService usersService, IArticlesService articlesService, IMapper mapper)
+        {
+            this.usersService = usersService;
+            this.articlesService = articlesService;
+            this.mapper = mapper;
+        }
+
         // GET: Blog
         public ActionResult Index()
         {
@@ -28,19 +43,35 @@ namespace WebKantora.Web.Areas.Administration.Controllers
         // POST: Blog/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateArticle(CreateArticleViewModel model)
+        public async Task<ActionResult> CreateArticle(CreateArticleViewModel model)
         {
             try
             {
-                var fileName = model.Content.FileName;
+                var text = await FileHelpers.ProcessFormFile(model.ArticleContent, ModelState);
+                if(ModelState.IsValid)
+                {
+                    var article = this.mapper.Map<Article>(model);
+                    var user = await this.usersService.GetByUserName(User.Identity.Name);
+                    article.Content = text;
+                    article.Author = user;
+                    article.Date = DateTime.UtcNow;
+
+                    //TODO: add keywords
+
+                    await this.articlesService.Add(article);
+                }
+
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View(model);
             }
         }
-/*
+
+        //TODO: edit and delete articles
+
+        /*
         // GET: Blog/Edit/5
         public ActionResult Edit(int id)
         {
