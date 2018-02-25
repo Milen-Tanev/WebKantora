@@ -23,9 +23,9 @@ namespace WebKantora.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(int pageNumber = 1)
+        public ActionResult Index(int page = 1)
         {
-            var viewModel = this.articlesService.GetAll().To<ArticleViewModel>().ToPagedList<ArticleViewModel>(pageNumber, 1);
+            var viewModel = this.articlesService.GetAll().To<ArticleViewModel>().ToPagedList(page, 3);
             
             return this.View(viewModel);
         }
