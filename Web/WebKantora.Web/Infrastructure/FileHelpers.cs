@@ -5,6 +5,8 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WebKantora.Web.Areas.Administration.Models.BlogViewModels;
@@ -21,13 +23,11 @@ namespace WebKantora.Web.Infrastructure
             // property associated with this IFormFile. If a display
             // name isn't found, error messages simply won't show
             // a display name.
-            MemberInfo property =
-                typeof(CreateArticleViewModel).GetProperty(formFile.Name.Substring(formFile.Name.IndexOf(".") + 1));
+            MemberInfo property = typeof(CreateArticleViewModel).GetProperty(formFile.Name.Substring(formFile.Name.IndexOf(".") + 1));
 
             if (property != null)
             {
-                var displayAttribute =
-                    property.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
+                var displayAttribute = property.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
 
                 if (displayAttribute != null)
                 {
@@ -39,7 +39,9 @@ namespace WebKantora.Web.Infrastructure
             // strip any path information passed as part of the
             // FileName property. HtmlEncode the result in case it must 
             // be returned in an error message.
+
             var fileName = WebUtility.HtmlEncode(Path.GetFileName(formFile.FileName));
+
             /*
             if (formFile.ContentType.ToLower() != "text/plain")
             {
@@ -65,20 +67,15 @@ namespace WebKantora.Web.Infrastructure
             {
                 try
                 {
-                    string fileContents;
-
+                    string fileContents = string.Empty;
                     // The StreamReader is created to read files that are UTF-8 encoded. 
                     // If uploads require some other encoding, provide the encoding in the 
                     // using statement. To change to 32-bit encoding, change 
                     // new UTF8Encoding(...) to new UTF32Encoding().
-                    using (
-                        var reader =
-                            new StreamReader(
-                                formFile.OpenReadStream(),
-                                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true),
-                                detectEncodingFromByteOrderMarks: true))
+                    using (WordprocessingDocument wordDocument = WordprocessingDocument.Open(formFile.OpenReadStream(), false))
                     {
-                        fileContents = await reader.ReadToEndAsync();
+                        Body body = wordDocument.MainDocumentPart.Document.Body;
+                        fileContents = body.InnerText;
 
                         // Check the content length in case the file's only
                         // content was a BOM and the content is actually
@@ -89,8 +86,7 @@ namespace WebKantora.Web.Infrastructure
                         }
                         else
                         {
-                            modelState.AddModelError(formFile.Name,
-                                                     $"The {fieldDisplayName}file ({fileName}) is empty.");
+                            modelState.AddModelError(formFile.Name, $"The {fieldDisplayName}file ({fileName}) is empty.");
                         }
                     }
                 }
@@ -107,4 +103,3 @@ namespace WebKantora.Web.Infrastructure
         }
     }
 }
-

@@ -37,14 +37,16 @@ namespace WebKantora.Data
                     userRole
                 };
 
-                foreach (var role in roles)
+                foreach (var r in roles)
                 {
-                    roleManager.CreateAsync(new IdentityRole
+                    var role = roleManager.CreateAsync(new IdentityRole
                     {
-                        Name = role
+                        Name = r
                     });
+                    role.Wait();
 
-                    userManager.AddToRoleAsync(user, administrationRole);
+                    var userR= userManager.AddToRoleAsync(user, administrationRole);
+                    //userR.Wait();
                 }
 
                 var keywords = new List<Keyword>();
