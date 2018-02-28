@@ -31,7 +31,7 @@ namespace WebKantora.Data.Common
 
         public async Task Delete(string id)
         {
-            var entity = await GetById(id);
+            var entity = await this.GetById(id);
             entity.IsDeleted = true;
         }
 

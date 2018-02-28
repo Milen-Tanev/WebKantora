@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WebKantora.Data.Migrations
 {
-    public partial class Userauthor : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,6 +35,23 @@ namespace WebKantora.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CustomErrors",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CustomMessage = table.Column<string>(nullable: true),
+                    InnerException = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true),
+                    Source = table.Column<string>(nullable: true),
+                    StackTrace = table.Column<string>(nullable: true),
+                    ThrowTIme = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomErrors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -172,7 +189,6 @@ namespace WebKantora.Data.Migrations
                     AuthorId = table.Column<string>(nullable: false),
                     Content = table.Column<string>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
-                    ImageUrl = table.Column<string>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     Title = table.Column<string>(nullable: false)
                 },
@@ -191,24 +207,23 @@ namespace WebKantora.Data.Migrations
                 name: "Messages",
                 columns: table => new
                 {
-                    AuthorId = table.Column<string>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
+                    AuthorId = table.Column<string>(nullable: true),
                     AuthorName = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: true),
-                    Id = table.Column<Guid>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Messages", x => x.AuthorId);
-                    table.UniqueConstraint("AK_Messages_Id", x => x.Id);
+                    table.PrimaryKey("PK_Messages", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Messages_AspNetUsers_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -273,6 +288,11 @@ namespace WebKantora.Data.Migrations
                 column: "ArticleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Messages_AuthorId",
+                table: "Messages",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -300,6 +320,9 @@ namespace WebKantora.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "CustomErrors");
 
             migrationBuilder.DropTable(
                 name: "KeywordArticle");
