@@ -19,25 +19,17 @@ namespace WebKantora.Services.Data
             this.unitOfWork = unitOfWork;
         }
 
-        /*
-        public void Add(Article article)
-        {
-            this.articles.Add(article);
-            this.unitOfWork.Commit();
-        }
-        */
-
         public async Task Add(Article article)
         {
             try
             {
                 await this.articles.Add(article);
+                await this.unitOfWork.Commit();
             }
             catch (Exception ex)
             {
-                throw ex;
+                
             }
-            await this.unitOfWork.Commit();
         }
 
         public IQueryable GetAll()

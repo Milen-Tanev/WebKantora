@@ -20,9 +20,10 @@ namespace WebKantora.Data.Common
 
         public DbSet<Message> DbSet { get; }
 
-        public async Task Add(Message entity)
+        public Task Add(Message entity)
         {
-            await this.DbSet.AddAsync(entity);
+            throw new ArgumentException("Some weird ass exception");
+            //await this.DbSet.AddAsync(entity);
         }
 
         public IQueryable<Message> All()
@@ -32,14 +33,13 @@ namespace WebKantora.Data.Common
 
         public async Task Delete(Guid id)
         {
-            var entity = await GetById(id);
+            var entity = await this.GetById(id);
             entity.IsDeleted = true;
         }
 
         public async Task<Message> GetById(Guid id)
         {
             return await this.DbSet
-                //.Include(e => e.AuthorId)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 

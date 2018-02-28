@@ -94,3 +94,8 @@ textarea {
 ul.pager>li>a{
     border-radius: 0px;
 }
+
+.my-navbar-brand {
+    margin-top: -12px;
+    width: 120px;
+}

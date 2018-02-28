@@ -7,6 +7,9 @@
   <ItemGroup>
     <Compile Remove="Contracts\AbstractDbRepository.cs" />
     <Compile Remove="Contracts\IAbstractDbRepository.cs" />
+    <Compile Remove="Contracts\ICustomErrorService.cs" />
+    <Compile Remove="Contracts\IExceptionLogDbRepository.cs" />
+    <Compile Remove="CustomErrorService.cs" />
   </ItemGroup>
 
   <ItemGroup>

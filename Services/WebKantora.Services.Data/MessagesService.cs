@@ -10,11 +10,13 @@ namespace WebKantora.Services.Data
     {
         private IMessageDbRepository messages;
         private IUnitOfWork unitOfWork;
+        private ICustomErrorService customErrors;
 
-        public MessagesService(IMessageDbRepository messages, IUnitOfWork unitOfWork)
+        public MessagesService(IMessageDbRepository messages, IUnitOfWork unitOfWork, ICustomErrorService customErrors)
         {
             this.messages = messages;
             this.unitOfWork = unitOfWork;
+            this.customErrors = customErrors;
         }
 
         public async Task Add(Message message)
@@ -22,12 +24,21 @@ namespace WebKantora.Services.Data
             try
             {
                 await this.messages.Add(message);
+                await this.unitOfWork.Commit();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw ex;
+                var error = new CustomError()
+                {
+                    InnerException = "",
+                    Message = ex.Message,
+                    Source = ex.Source,
+                    StackTrace = ex.StackTrace,
+                    CustomMessage = ""
+                };
+
+                await this.customErrors.Add(error);
             }
-            await this.unitOfWork.Commit();
         }
     }
 }

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Contracts\IExceptionLogsService.cs" />
+    <Compile Remove="ExceptionLogsService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Data\WebKantora.Data.Common\WebKantora.Data.Common.csproj" />
   </ItemGroup>
 

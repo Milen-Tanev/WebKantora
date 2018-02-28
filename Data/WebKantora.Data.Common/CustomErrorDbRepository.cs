@@ -8,24 +8,24 @@ using WebKantora.Data.Models;
 
 namespace WebKantora.Data.Common
 {
-    public class KeywordDbRepository : IKeywordDbRepository
+    public class CustomErrorDbRepository : ICustomErrorDbRepository
     {
-        public KeywordDbRepository(WebKantoraDbContext context)
+        public CustomErrorDbRepository(WebKantoraDbContext context)
         {
             this.Context = context;
-            this.DbSet = this.Context.Set<Keyword>();
+            this.DbSet = this.Context.Set<CustomError>();
         }
 
         public WebKantoraDbContext Context { get; }
 
-        public DbSet<Keyword> DbSet { get; }
+        public DbSet<CustomError> DbSet { get; }
 
-        public async Task Add(Keyword entity)
+        public async Task Add(CustomError entity)
         {
             await this.DbSet.AddAsync(entity);
         }
 
-        public IQueryable<Keyword> All()
+        public IQueryable<CustomError> All()
         {
             return this.DbSet.AsNoTracking();
         }
@@ -33,17 +33,16 @@ namespace WebKantora.Data.Common
         public async Task Delete(Guid id)
         {
             var entity = await this.GetById(id);
-            entity.IsDeleted = true;
+            this.DbSet.Remove(entity);
         }
 
-        public async Task<Keyword> GetById(Guid id)
+        public async Task<CustomError> GetById(Guid id)
         {
             return await this.DbSet
-                .Include(e => e.KeywordArticles)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public void Update(Guid id, Keyword entity)
+        public void Update(Guid id, CustomError entity)
         {
             this.DbSet.Update(entity);
         }

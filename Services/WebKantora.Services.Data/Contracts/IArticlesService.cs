@@ -7,8 +7,6 @@ namespace WebKantora.Services.Data.Contracts
 {
     public interface IArticlesService
     {
-        //void Add(Article article);
-
         Task Add(Article article);
 
         IQueryable GetAll();

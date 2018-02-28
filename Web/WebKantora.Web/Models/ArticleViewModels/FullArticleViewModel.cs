@@ -5,7 +5,7 @@ using WebKantora.Data.Models;
 
 namespace WebKantora.Web.Models.ArticleViewModels
 {
-    public class ArticleViewModel
+    public class FullArticleViewModel
     {
         public Guid Id { get; set; }
 
@@ -16,7 +16,7 @@ namespace WebKantora.Web.Models.ArticleViewModels
         public DateTime Date { get; set; }
 
         public string Content { get; set; }
-        
+
         public ICollection<KeywordArticle> KeywordArticles { get; set; }
     }
 }

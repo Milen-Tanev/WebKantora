@@ -8,9 +8,10 @@ using WebKantora.Data;
 namespace WebKantora.Data.Migrations
 {
     [DbContext(typeof(WebKantoraDbContext))]
-    partial class WebKantoraDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180228163850_Custom errors added")]
+    partial class Customerrorsadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.5")
@@ -155,13 +156,17 @@ namespace WebKantora.Data.Migrations
 
                     b.Property<string>("CustomMessage");
 
-                    b.Property<string>("InnerException");
+                    b.Property<string>("InnerException")
+                        .IsRequired();
 
-                    b.Property<string>("Message");
+                    b.Property<string>("Message")
+                        .IsRequired();
 
-                    b.Property<string>("Source");
+                    b.Property<string>("Source")
+                        .IsRequired();
 
-                    b.Property<string>("StackTrace");
+                    b.Property<string>("StackTrace")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

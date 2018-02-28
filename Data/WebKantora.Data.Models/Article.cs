@@ -29,9 +29,7 @@ namespace WebKantora.Data.Models
         //MinLength, MaxLength?
         [Required]
         public string Content { get; set; }
-
-        public string ImageUrl { get; set; }
-
+        
         public ICollection<KeywordArticle> KeywordArticles { get; set; }
 
         [Required]

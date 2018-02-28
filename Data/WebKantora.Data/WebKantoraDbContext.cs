@@ -13,6 +13,8 @@ namespace WebKantora.Data
 
         public DbSet<Article> Articles { get; set; }
 
+        public DbSet<CustomError> CustomErrors { get; set; }
+
         public DbSet<Keyword> Keywords { get; set; }
 
         public DbSet<Message> Messages { get; set; }

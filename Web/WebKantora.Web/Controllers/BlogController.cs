@@ -35,7 +35,7 @@ namespace WebKantora.Web.Controllers
         public async Task<ActionResult> ById(Guid id)
         {
             var article = await this.articlesService.GetById(id);
-            var viewModel = this.mapper.Map<ArticleViewModel>(article);
+            var viewModel = this.mapper.Map<FullArticleViewModel>(article);
 
             return this.View(viewModel);
         }

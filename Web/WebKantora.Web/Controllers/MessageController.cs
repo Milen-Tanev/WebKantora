@@ -15,13 +15,19 @@ namespace WebKantora.Web.Controllers
         private IMessagesService messagesService;
         private IUsersService usersService;
         private IEmailSenderService emailSenderService;
+        private ICustomErrorService customErrors;
         private IMapper mapper;
 
-        public MessageController(IMessagesService messagesService, IUsersService usersService, IEmailSenderService emailSenderService, IMapper mapper)
+        public MessageController(IMessagesService messagesService,
+            IUsersService usersService,
+            IEmailSenderService emailSenderService,
+            ICustomErrorService customErrors,
+            IMapper mapper)
         {
             this.messagesService = messagesService;
             this.usersService = usersService;
             this.emailSenderService = emailSenderService;
+            this.customErrors = customErrors;
             this.mapper = mapper;
         }
 
@@ -74,7 +80,23 @@ namespace WebKantora.Web.Controllers
                         var user = await this.usersService.GetByUserName(User.Identity.Name);
                         message.Author = user;
                     }
+                    try
+                    {
+                        await this.messagesService.Add(message);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        var error = new CustomError()
+                        {
+                            InnerException = ex.InnerException.ToString(),
+                            Message = ex.Message,
+                            Source = ex.Source,
+                            StackTrace = ex.StackTrace,
+                            CustomMessage = ""
+                        };
 
+                        await this.customErrors.Add(error);
+                    }
                     await this.messagesService.Add(message);
                     return this.RedirectToAction("Index", "Home");
                 }
