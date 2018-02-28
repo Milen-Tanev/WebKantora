@@ -88,7 +88,7 @@ namespace WebKantora.Web.Controllers
                     {
                         var error = new CustomError()
                         {
-                            InnerException = ex.InnerException.ToString(),
+                            InnerException = "стр",
                             Message = ex.Message,
                             Source = ex.Source,
                             StackTrace = ex.StackTrace,
@@ -97,7 +97,7 @@ namespace WebKantora.Web.Controllers
 
                         await this.customErrors.Add(error);
                     }
-                    await this.messagesService.Add(message);
+
                     return this.RedirectToAction("Index", "Home");
                 }
                 else

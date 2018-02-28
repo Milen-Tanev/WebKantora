@@ -8,6 +8,7 @@ namespace WebKantora.Data.Models
         public CustomError()
         {
             this.Id = Guid.NewGuid();
+            this.ThrowTIme = DateTime.UtcNow;
         }
 
         [Key]
@@ -22,5 +23,8 @@ namespace WebKantora.Data.Models
         public string Message { get; set; }
 
         public string StackTrace { get; set; }
+
+        [Required]
+        public DateTime ThrowTIme { get; private set; }
     }
 }

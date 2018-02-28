@@ -21,24 +21,26 @@ namespace WebKantora.Services.Data
 
         public async Task Add(Message message)
         {
-            try
-            {
-                await this.messages.Add(message);
-                await this.unitOfWork.Commit();
-            }
-            catch (Exception ex)
-            {
-                var error = new CustomError()
-                {
-                    InnerException = "",
-                    Message = ex.Message,
-                    Source = ex.Source,
-                    StackTrace = ex.StackTrace,
-                    CustomMessage = ""
-                };
+            //try
+            //{
+            //    await this.messages.Add(message);
+            //    await this.unitOfWork.Commit();
+            //}
+            //catch (Exception ex)
+            //{
+            //    var error = new CustomError()
+            //    {
+            //        InnerException = "",
+            //        Message = ex.Message,
+            //        Source = ex.Source,
+            //        StackTrace = ex.StackTrace,
+            //        CustomMessage = ""
+            //    };
 
-                await this.customErrors.Add(error);
-            }
+            //    await this.customErrors.Add(error);
+            //}
+            await this.messages.Add(message);
+            await this.unitOfWork.Commit();
         }
     }
 }
