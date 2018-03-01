@@ -21,15 +21,9 @@ namespace WebKantora.Services.Data
 
         public async Task Add(Article article)
         {
-            try
-            {
-                await this.articles.Add(article);
-                await this.unitOfWork.Commit();
-            }
-            catch (Exception ex)
-            {
-                
-            }
+
+            await this.articles.Add(article);
+            await this.unitOfWork.Commit();
         }
 
         public IQueryable GetAll()

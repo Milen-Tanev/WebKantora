@@ -27,7 +27,10 @@ namespace WebKantora.Data.Common
 
         public IQueryable<Article> All()
         {
-            return this.DbSet.AsNoTracking();
+            return this.DbSet
+                .Include(e => e.Author)
+                .Include(e => e.KeywordArticles)
+                .AsNoTracking();
         }
 
         public async Task Delete(Guid id)
@@ -41,6 +44,7 @@ namespace WebKantora.Data.Common
             return await this.DbSet
                 .Include(e => e.Author)
                 .Include(e => e.KeywordArticles)
+                    .ThenInclude(keywordArticles => keywordArticles.Keyword)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
