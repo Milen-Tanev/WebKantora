@@ -19,6 +19,8 @@ namespace WebKantora.Web.Infrastructure
             CreateMap<Article, ArticleViewModel>()
                 .ForMember(x => x.Author, opt => opt.MapFrom(x => $"{x.Author.FirstName} {x.Author.LastName}"))
                 .ForMember(x => x.Content, opt => opt.MapFrom(x => $"{x.Content.Substring(0, 200)}..."));
+            CreateMap<Article, FullArticleViewModel>()
+                .ForMember(x => x.Author, opt => opt.MapFrom(x => $"{x.Author.FirstName} {x.Author.LastName}"));
             CreateMap<ContactFormViewModel, Message>()
                 .ForMember(x => x.AuthorName, opt => opt.MapFrom(x => $"{x.FirstName} {x.LastName}"));
             CreateMap<CreateArticleViewModel, Article>()

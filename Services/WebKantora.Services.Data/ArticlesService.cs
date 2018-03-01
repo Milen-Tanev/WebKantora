@@ -21,7 +21,6 @@ namespace WebKantora.Services.Data
 
         public async Task Add(Article article)
         {
-
             await this.articles.Add(article);
             await this.unitOfWork.Commit();
         }

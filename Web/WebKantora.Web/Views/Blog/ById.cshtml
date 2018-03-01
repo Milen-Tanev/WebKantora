@@ -9,7 +9,7 @@
 <h2>@Model.Title</h2>
 <h4>By: @Model.Author</h4>
 <div>@Model.Date</div>
-<div>@Model.Content</div>
+<div>@Html.Raw(Model.Content)</div>
 
 <ul>
     @foreach (var KeywordArticle in Model.KeywordArticles)

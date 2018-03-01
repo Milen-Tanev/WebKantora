@@ -15,7 +15,7 @@
 {
     <h3><a asp-area="" asp-controller="Blog" asp-action="ById" asp-route-id="@article.Id">@article.Title</a></h3>
     <div>By: @article.Author</div>
-    <div>@article.Content</div>
+    <div>@Html.Raw(article.Content)</div>
     <div>@article.Date</div>
 }
 

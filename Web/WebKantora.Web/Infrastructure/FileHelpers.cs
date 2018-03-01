@@ -19,10 +19,6 @@ namespace WebKantora.Web.Infrastructure
         {
             var fieldDisplayName = string.Empty;
 
-            // Use reflection to obtain the display name for the model 
-            // property associated with this IFormFile. If a display
-            // name isn't found, error messages simply won't show
-            // a display name.
             MemberInfo property = typeof(CreateArticleViewModel).GetProperty(formFile.Name.Substring(formFile.Name.IndexOf(".") + 1));
 
             if (property != null)
@@ -35,26 +31,8 @@ namespace WebKantora.Web.Infrastructure
                 }
             }
 
-            // Use Path.GetFileName to obtain the file name, which will
-            // strip any path information passed as part of the
-            // FileName property. HtmlEncode the result in case it must 
-            // be returned in an error message.
-
             var fileName = WebUtility.HtmlEncode(Path.GetFileName(formFile.FileName));
 
-            /*
-            if (formFile.ContentType.ToLower() != "text/plain")
-            {
-                modelState.AddModelError(formFile.Name,
-                                         $"The {fieldDisplayName}file ({fileName}) must be a text file.");
-            }
-            */
-            // Check the file length and don't bother attempting to
-            // read it if the file contains no content. This check
-            // doesn't catch files that only have a BOM as their
-            // content, so a content length check is made later after 
-            // reading the file's content to catch a file that only
-            // contains a BOM.
             if (formFile.Length == 0)
             {
                 modelState.AddModelError(formFile.Name, $"The {fieldDisplayName}file ({fileName}) is empty.");
@@ -67,22 +45,15 @@ namespace WebKantora.Web.Infrastructure
             {
                 try
                 {
-                    string fileContents = string.Empty;
-                    // The StreamReader is created to read files that are UTF-8 encoded. 
-                    // If uploads require some other encoding, provide the encoding in the 
-                    // using statement. To change to 32-bit encoding, change 
-                    // new UTF8Encoding(...) to new UTF32Encoding().
                     using (WordprocessingDocument wordDocument = WordprocessingDocument.Open(formFile.OpenReadStream(), false))
                     {
                         Body body = wordDocument.MainDocumentPart.Document.Body;
-                        fileContents = body.InnerText;
 
-                        // Check the content length in case the file's only
-                        // content was a BOM and the content is actually
-                        // empty after removing the BOM.
-                        if (fileContents.Length > 0)
+                        var text = await Task.Run(() => ConvertFile(body));
+
+                        if (text.Length > 0)
                         {
-                            return fileContents;
+                            return text;
                         }
                         else
                         {
@@ -100,6 +71,62 @@ namespace WebKantora.Web.Infrastructure
             }
 
             return string.Empty;
+        }
+
+        private static string ConvertFile(Body body)
+        {
+            StringBuilder sb = new StringBuilder();
+            var paragraphs = body.Elements<Paragraph>();
+
+            foreach (var paragraph in paragraphs)
+            {
+                if (string.IsNullOrEmpty(paragraph.InnerText))
+                {
+                    continue;
+                }
+
+                sb.Append("<p>");
+                var runs = paragraph.Elements<Run>();
+
+                foreach (var run in runs)
+                {
+                    var innerText = run.InnerText;
+
+                    if (string.IsNullOrEmpty(innerText))
+                    {
+                        continue;
+                    }
+                    if (run.RunProperties != null)
+                    {
+                        var props = run.RunProperties;
+
+                        foreach (var prop in props)
+                        {
+                            if (prop.LocalName == "b")
+                            {
+                                innerText = $"<strong>{innerText}</strong>";
+                            }
+                            else if (prop.LocalName == "i")
+                            {
+                                innerText = $"<em>{innerText}</em>";
+                            }
+                            else if (prop.LocalName == "sz")
+                            {
+                                innerText = $"<h3>{innerText}</h3>";
+                            }
+                        }
+                        sb.Append(innerText);
+                    }
+                    else
+                    {
+                        sb.Append(run.InnerText);
+                    }
+                }
+
+                sb.Append("</p>");
+            }
+
+            return sb.ToString();
         }
     }
 }
