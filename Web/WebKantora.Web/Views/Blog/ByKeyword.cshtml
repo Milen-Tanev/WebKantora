@@ -1,0 +1,25 @@
+@using PagedList.Core
+@using PagedList.Core.Mvc
+@using WebKantora.Web.Models.ArticleViewModels
+@using WebKantora.Data.Models
+@addTagHelper *, PagedList.Core.Mvc
+@model IPagedList<ArticleViewModel>
+
+@{
+    ViewData["Title"] = "Articles";
+}
+
+<h2>Articles</h2>
+
+@foreach(var article in Model)
+{
+    <h3><a asp-area="" asp-controller="Blog" asp-action="ById" asp-route-id="@article.Id">@article.Title</a></h3>
+    <div>By: @article.Author</div>
+    <div>@Html.Raw(article.Content)</div>
+    <div>@article.Date</div>
+}
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+<pager class="pager-container" list="@Model" options="@PagedListRenderOptions.TwitterBootstrapPager" asp-controller="Blog" asp-action="ByKeyword" asp-route-keyWordId="@ViewBag.KeywordId"/>

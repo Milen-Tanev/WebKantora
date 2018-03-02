@@ -12,5 +12,7 @@ namespace WebKantora.Services.Data.Contracts
         IQueryable GetAll();
 
         Task<Article> GetById(Guid id);
+
+        IQueryable GetByKeyword(Guid keywordId);
     }
 }

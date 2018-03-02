@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using PagedList.Core;
 
 using WebKantora.Web.Infrastructure.Mappings;
@@ -26,7 +25,8 @@ namespace WebKantora.Web.Controllers
         public ActionResult Index(int page = 1)
         {
             // Keyword[] parameter
-            var viewModel = this.articlesService.GetAll().To<ArticleViewModel>().ToPagedList(page, 3);
+            var viewModel = this.articlesService.GetAll()
+                .To<ArticleViewModel>().ToPagedList(page, 5);
             
             return this.View(viewModel);
         }
@@ -36,6 +36,17 @@ namespace WebKantora.Web.Controllers
         {
             var article = await this.articlesService.GetById(id);
             var viewModel = this.mapper.Map<FullArticleViewModel>(article);
+
+            return this.View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult ByKeyword(Guid keywordId, int page = 1)
+        {
+            var viewModel = this.articlesService.GetByKeyword(keywordId)
+                .To<ArticleViewModel>().ToPagedList(page, 3);
+
+            ViewBag.KeywordId = keywordId;
 
             return this.View(viewModel);
         }

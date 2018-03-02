@@ -38,5 +38,13 @@ namespace WebKantora.Services.Data
             var article = await this.articles.GetById(id);
             return article;
         }
+
+        public IQueryable GetByKeyword(Guid keywordId)
+        {
+            var articles = this.articles.All()
+                .Where(a => a.KeywordArticles.Any(x => x.KeywordId == keywordId));
+
+            return articles;
+        }
     }
 }
