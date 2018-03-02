@@ -20,10 +20,9 @@ namespace WebKantora.Data.Common
 
         public DbSet<Message> DbSet { get; }
 
-        public Task Add(Message entity)
+        public async Task Add(Message entity)
         {
-            throw new ArgumentException("Some weird ass exception");
-            //await this.DbSet.AddAsync(entity);
+            await this.DbSet.AddAsync(entity);
         }
 
         public IQueryable<Message> All()
