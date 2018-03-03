@@ -18,10 +18,17 @@
         <label asp-for="ArticleContent" class="col-md-2 control-label">Текстов файл</label>
         <div class="col-md-10">
             <input asp-for="ArticleContent" type="file" />
-            @*<textarea asp-for="ArticleContent" class="form-control"></textarea>*@
             <span asp-validation-for="ArticleContent" class="text-danger"></span>
         </div>
-        <h3>Как да се добавят ключовите думи</h3>
+        <label asp-for="ArticleContent" class="col-md-2 control-label">Ключови думи</label>
+        <div class="col-md-10">
+            @foreach(var k in Model.Keywords)
+            {
+                <h1>k.Content</h1>
+            }
+            <input asp-for="Keywords" type="text" />
+            <span asp-validation-for="Keywords" class="text-danger"></span>
+        </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

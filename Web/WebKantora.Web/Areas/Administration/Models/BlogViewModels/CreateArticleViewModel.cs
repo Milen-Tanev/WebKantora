@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using WebKantora.Data.Models;
 
 namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
 {
@@ -15,6 +16,6 @@ namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
         [Display(Name = "Текст")]
         public IFormFile ArticleContent { get; set; }
 
-        public ICollection<string> Keywords { get; set; }
+        public ICollection<Keyword> Keywords { get; set; }
     }
 }

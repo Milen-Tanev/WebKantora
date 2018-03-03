@@ -25,7 +25,7 @@ namespace WebKantora.Services.Data
             await this.unitOfWork.Commit();
         }
 
-        public IQueryable GetAll()
+        public IQueryable<Article> GetAll()
         {
             var allArticles = this.articles.All()
                 .OrderByDescending(a => a.Date);
@@ -39,7 +39,7 @@ namespace WebKantora.Services.Data
             return article;
         }
 
-        public IQueryable GetByKeyword(Guid keywordId)
+        public IQueryable<Article> GetByKeyword(Guid keywordId)
         {
             var articles = this.articles.All()
                 .Where(a => a.KeywordArticles.Any(x => x.KeywordId == keywordId));

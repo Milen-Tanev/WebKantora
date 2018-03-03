@@ -19,12 +19,14 @@ namespace WebKantora.Web.Areas.Administration.Controllers
     {
         private IUsersService usersService;
         private IArticlesService articlesService;
+        private IKeywordsService keywordsService;
         private IMapper mapper;
 
-        public BlogController(IUsersService usersService, IArticlesService articlesService, IMapper mapper)
+        public BlogController(IUsersService usersService, IArticlesService articlesService, IKeywordsService keywordsService, IMapper mapper)
         {
             this.usersService = usersService;
             this.articlesService = articlesService;
+            this.keywordsService = keywordsService;
             this.mapper = mapper;
         }
 
@@ -37,6 +39,8 @@ namespace WebKantora.Web.Areas.Administration.Controllers
         // GET: Blog/Create
         public ActionResult CreateArticle()
         {
+            var keywords = this.keywordsService.GetAll().ToList();
+            TempData["keywords"] = keywords;
             return View();
         }
 
