@@ -40,8 +40,13 @@ namespace WebKantora.Web.Areas.Administration.Controllers
         public ActionResult CreateArticle()
         {
             var keywords = this.keywordsService.GetAll().ToList();
-            TempData["keywords"] = keywords;
-            return View();
+
+            var model = new CreateArticleViewModel()
+            {
+                AllKeywords = keywords
+            };
+
+            return View(model);
         }
 
         // POST: Blog/Create

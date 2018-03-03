@@ -13,9 +13,12 @@ namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
 
         //TODO: Min/Max Length
         [Required]
-        [Display(Name = "Текст")]
+        [Display(Name = "Файл")]
         public IFormFile ArticleContent { get; set; }
 
+        public ICollection<Keyword> AllKeywords { get; set; }
+
+        [Display(Name = "Ключови думи")]
         public ICollection<Keyword> Keywords { get; set; }
     }
 }
