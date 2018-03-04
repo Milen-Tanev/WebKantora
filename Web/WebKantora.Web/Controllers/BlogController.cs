@@ -44,7 +44,7 @@ namespace WebKantora.Web.Controllers
         public ActionResult ByKeyword(Guid keywordId, int page = 1)
         {
             var viewModel = this.articlesService.GetByKeyword(keywordId)
-                .To<ArticleViewModel>().ToPagedList(page, 3);
+                .To<ArticleViewModel>().ToPagedList(page, 2);
 
             ViewBag.KeywordId = keywordId;
 

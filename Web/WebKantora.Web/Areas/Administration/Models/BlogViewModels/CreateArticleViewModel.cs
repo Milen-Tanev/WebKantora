@@ -7,6 +7,11 @@ namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
 {
     public class CreateArticleViewModel
     {
+        public CreateArticleViewModel()
+        {
+            this.Keywords = new List<Keyword>();
+        }
+
         [Required]
         [Display(Name = "Заглавие")]
         public string Title { get; set; }
@@ -19,6 +24,6 @@ namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
         public ICollection<Keyword> AllKeywords { get; set; }
 
         [Display(Name = "Ключови думи")]
-        public ICollection<Keyword> Keywords { get; set; }
+        public IList<Keyword> Keywords { get; set; }
     }
 }
