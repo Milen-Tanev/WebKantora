@@ -85,7 +85,8 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                 Content = keyWord
             };
 
-            return View("_AllKeywords", model);
+            model.Keywords.Add(newKeyWord);
+            return PartialView("_AllKeywords", model);
         }
 
         //TODO: edit and delete articles
