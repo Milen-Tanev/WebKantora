@@ -43,7 +43,7 @@ namespace WebKantora.Web.Areas.Administration.Controllers
 
             var model = new CreateArticleViewModel()
             {
-                AllKeywords = keywords
+                AllKeywords = keywords.Select(x => x.Content).ToList()
             };
 
             return View(model);
@@ -78,14 +78,15 @@ namespace WebKantora.Web.Areas.Administration.Controllers
             }
         }
          
-        public async Task<PartialViewResult> AddKeyword(CreateArticleViewModel model, string keyWord)
+        public async Task<PartialViewResult> AddKeyword(CreateArticleViewModel model)
         {
+            /*
             var newKeyWord = new Keyword()
             {
-                Content = keyWord
+                Content = model.Keyword
             };
-
-            model.Keywords.Add(newKeyWord);
+            */
+            model.Keywords.Add(model.Keyword);
             return PartialView("_AllKeywords", model);
         }
 

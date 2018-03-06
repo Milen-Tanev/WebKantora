@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using WebKantora.Data.Models;
 
 namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
 {
@@ -9,7 +8,7 @@ namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
     {
         public CreateArticleViewModel()
         {
-            this.Keywords = new List<Keyword>();
+            this.Keywords = new List<string>();
         }
 
         [Required]
@@ -21,9 +20,14 @@ namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
         [Display(Name = "Файл")]
         public IFormFile ArticleContent { get; set; }
 
-        public ICollection<Keyword> AllKeywords { get; set; }
+        public ICollection<string> AllKeywords { get; set; }
 
         [Display(Name = "Ключови думи")]
-        public IList<Keyword> Keywords { get; set; }
+        public IList<string> Keywords { get; set; }
+
+        //TODO: Min/Max Length
+        [Required]
+        [Display(Name = "Ключова дума")]
+        public string Keyword { get; set; }
     }
 }
