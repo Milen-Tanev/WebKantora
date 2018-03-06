@@ -29,10 +29,16 @@
         </div>
     </div>
     <div id="all-keywords">
-        @await Html.PartialAsync("_AllKeywords");
+        @await Html.PartialAsync("_AllKeywords")
     </div>
 </form>
-<form asp-area="Administration" asp-controller="Blog" asp-action="AddKeyword">
+<form asp-area="Administration" asp-controller="Blog" asp-action="AddKeyword"
+    data-ajax="true" 
+    data-ajax-method="POST"
+    data-ajax-mode="after" 
+    data-ajax-update="#all-keywords"
+    data-ajax-success="Success"
+    data-ajax-failure ="Failure">
     <div class="form-group">
         <label asp-for="Keyword" class="col-md-2 control-label"></label>
         <div class="col-md-10">
