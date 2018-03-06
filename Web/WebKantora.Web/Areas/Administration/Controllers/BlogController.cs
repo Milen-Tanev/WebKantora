@@ -77,6 +77,16 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                 return View(model);
             }
         }
+         
+        public async Task<PartialViewResult> AddKeyword(CreateArticleViewModel model, string keyWord)
+        {
+            var newKeyWord = new Keyword()
+            {
+                Content = keyWord
+            };
+
+            return View("_AllKeywords", model);
+        }
 
         //TODO: edit and delete articles
 
