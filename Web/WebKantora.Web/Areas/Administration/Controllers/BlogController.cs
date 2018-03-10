@@ -64,7 +64,7 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                     article.Content = text;
                     article.Author = user;
                     article.Date = DateTime.UtcNow;
-
+                    article.IsDeleted = false;
                     //TODO: add keywords
 
                     await this.articlesService.Add(article);
@@ -89,8 +89,30 @@ namespace WebKantora.Web.Areas.Administration.Controllers
             model.Keywords.Add(model.Keyword);
             return PartialView("_AllKeywords", model);
         }
+        /*
+        // GET: Blog/Delete/5
+        public ActionResult DeleteArticle(int id)
+        {
+            return View();
+        }
+        */
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteArticle(Guid id)
+        {
+            try
+            {
+                await this.articlesService.Delete(id);
 
-        //TODO: edit and delete articles
+                return Redirect("/Blog");
+            }
+            catch(Exception ex)
+            {
+                return View();
+            }
+        }
+        
+        //TODO: edit articles
 
         /*
         // GET: Blog/Edit/5
@@ -107,29 +129,6 @@ namespace WebKantora.Web.Areas.Administration.Controllers
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Blog/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Blog/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             }

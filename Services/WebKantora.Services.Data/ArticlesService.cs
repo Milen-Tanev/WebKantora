@@ -46,5 +46,11 @@ namespace WebKantora.Services.Data
 
             return articles;
         }
+
+        public async Task Delete(Guid id)
+        {
+            await this.articles.Delete(id);
+            await this.unitOfWork.Commit();
+        }
     }
 }

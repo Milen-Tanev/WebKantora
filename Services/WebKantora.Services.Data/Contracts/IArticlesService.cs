@@ -14,5 +14,7 @@ namespace WebKantora.Services.Data.Contracts
         Task<Article> GetById(Guid id);
 
         IQueryable<Article> GetByKeyword(Guid keywordId);
+
+        Task Delete(Guid id);
     }
 }

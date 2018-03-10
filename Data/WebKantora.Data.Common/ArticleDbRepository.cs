@@ -30,7 +30,8 @@ namespace WebKantora.Data.Common
             return this.DbSet
                 .Include(e => e.Author)
                 .Include(e => e.KeywordArticles)
-                .AsNoTracking();
+                .AsNoTracking()
+                .Where(x => !x.IsDeleted); 
         }
 
         public async Task Delete(Guid id)
@@ -44,7 +45,8 @@ namespace WebKantora.Data.Common
             return await this.DbSet
                 .Include(e => e.Author)
                 .Include(e => e.KeywordArticles)
-                    .ThenInclude(keywordArticles => keywordArticles.Keyword)
+                .ThenInclude(keywordArticles => keywordArticles.Keyword)
+                .Where(x => !x.IsDeleted)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
