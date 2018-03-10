@@ -57,8 +57,10 @@ namespace WebKantora.Web.Areas.Administration.Controllers
             try
             {
                 var text = await FileHelpers.ProcessFormFile(model.ArticleContent, ModelState);
-                if(ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
+
+                    //TODO: try catch ?
                     var article = this.mapper.Map<Article>(model);
                     var user = await this.usersService.GetByUserName(User.Identity.Name);
                     article.Content = text;
@@ -66,11 +68,14 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                     article.Date = DateTime.UtcNow;
                     article.IsDeleted = false;
                     //TODO: add keywords
-
+                    
                     await this.articlesService.Add(article);
+                    return RedirectToAction("Index");
                 }
-
-                return RedirectToAction("Index");
+                else
+                {
+                    return View(model);
+                }
             }
             catch (Exception ex)
             {
@@ -80,13 +85,11 @@ namespace WebKantora.Web.Areas.Administration.Controllers
          
         public async Task<PartialViewResult> AddKeyword(CreateArticleViewModel model)
         {
-            /*
-            var newKeyWord = new Keyword()
+            if (!model.Keywords.Contains(model.Keyword))
             {
-                Content = model.Keyword
-            };
-            */
-            model.Keywords.Add(model.Keyword);
+                model.Keywords.Add(model.Keyword);
+            }
+
             return PartialView("_AllKeywords", model);
         }
         /*

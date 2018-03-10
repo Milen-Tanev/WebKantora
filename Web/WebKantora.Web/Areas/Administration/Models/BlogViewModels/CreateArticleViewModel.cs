@@ -26,7 +26,6 @@ namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
         public IList<string> Keywords { get; set; }
 
         //TODO: Min/Max Length
-        [Required]
         [Display(Name = "Ключова дума")]
         public string Keyword { get; set; }
     }
