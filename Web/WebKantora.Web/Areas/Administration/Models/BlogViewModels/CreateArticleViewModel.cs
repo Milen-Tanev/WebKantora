@@ -20,7 +20,7 @@ namespace WebKantora.Web.Areas.Administration.Models.BlogViewModels
         [Display(Name = "Файл")]
         public IFormFile ArticleContent { get; set; }
 
-        public ICollection<string> AllKeywords { get; set; }
+        public IList<string> AllKeywords { get; set; }
 
         [Display(Name = "Ключови думи")]
         public IList<string> Keywords { get; set; }

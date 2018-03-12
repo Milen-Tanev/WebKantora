@@ -82,7 +82,8 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                 return View(model);
             }
         }
-         
+        
+        [HttpPost]
         public async Task<PartialViewResult> AddKeyword(CreateArticleViewModel model)
         {
             if (!model.Keywords.Contains(model.Keyword))
