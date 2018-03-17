@@ -1,15 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebKantora.Web.Infrastructure;
 using WebKantora.Web.Areas.Administration.Models.BlogViewModels;
 using AutoMapper;
 using WebKantora.Services.Data.Contracts;
 using WebKantora.Data.Models;
+using System.Collections.Generic;
 
 namespace WebKantora.Web.Areas.Administration.Controllers
 {
@@ -20,13 +19,20 @@ namespace WebKantora.Web.Areas.Administration.Controllers
         private IUsersService usersService;
         private IArticlesService articlesService;
         private IKeywordsService keywordsService;
+        private IKeywordArticlesService keywordArticlesService;
         private IMapper mapper;
 
-        public BlogController(IUsersService usersService, IArticlesService articlesService, IKeywordsService keywordsService, IMapper mapper)
+        public BlogController(
+            IUsersService usersService,
+            IArticlesService articlesService,
+            IKeywordsService keywordsService,
+            IKeywordArticlesService keywordArticlesService,
+            IMapper mapper)
         {
             this.usersService = usersService;
             this.articlesService = articlesService;
             this.keywordsService = keywordsService;
+            this.keywordArticlesService = keywordArticlesService;
             this.mapper = mapper;
         }
 
@@ -67,9 +73,48 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                     article.Author = user;
                     article.Date = DateTime.UtcNow;
                     article.IsDeleted = false;
+
                     //TODO: add keywords
+                    var keywords = model.Keywords;
+                    var dbKeywords = this.keywordsService.GetAll();
+                    var articleKeywordsList = new HashSet<Keyword>();
+                    var keywordsArticles = new HashSet<KeywordArticle>();
+
+                    foreach (var keyword in keywords)
+                    {
+                        var newKeyword = dbKeywords.Where(x => x.Content.ToLower() == keyword.ToLower()).FirstOrDefault();
+
+                        if (newKeyword == null)
+                        {
+                            newKeyword = new Keyword()
+                            {
+                                Content = keyword
+                            };
+                            await this.keywordsService.Add(newKeyword);
+                        }
+
+                        //articleKeywordsList.Add(newKeyword);
+
+                        var newKeywordArticle = new KeywordArticle()
+                        {
+                            KeywordId = newKeyword.Id,
+   //                         Keyword = newKeyword,
+                            ArticleId = article.Id,
+ //                           Article = article
+                        };
+
+                        keywordsArticles.Add(newKeywordArticle);
+                        // newKeyword.KeywordArticles.Add(newKeywordArticle);
+                        // await this.keywordsService.Update(newKeyword.Id, newKeyword);
+                        article.KeywordArticles.Add(newKeywordArticle);
+                    }
+
                     
                     await this.articlesService.Add(article);
+                    
+                    /// Adds collection of keywordsArticles
+                    //await this.keywordArticlesService.Add(keywordsArticles);
+
                     return RedirectToAction("Index");
                 }
                 else

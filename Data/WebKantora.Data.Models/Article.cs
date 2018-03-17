@@ -11,6 +11,7 @@ namespace WebKantora.Data.Models
         public Article()
         {
             this.Id = Guid.NewGuid();
+            this.KeywordArticles = new HashSet<KeywordArticle>();
         }
 
         [Key]
