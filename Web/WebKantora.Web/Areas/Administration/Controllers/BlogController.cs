@@ -70,7 +70,6 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                 var text = await FileHelpers.ProcessFormFile(model.ArticleContent, ModelState);
                 if (ModelState.IsValid)
                 {
-
                     //TODO: try catch ?
                     var article = this.mapper.Map<Article>(model);
                     var user = await this.usersService.GetByUserName(User.Identity.Name);
@@ -79,7 +78,6 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                     article.Date = DateTime.UtcNow;
                     article.IsDeleted = false;
 
-                    //TODO: add keywords
                     var keywords = model.Keywords;
                     var dbKeywords = this.keywordsService.GetAll();
                     var articleKeywordsList = new HashSet<Keyword>();
@@ -135,7 +133,7 @@ namespace WebKantora.Web.Areas.Administration.Controllers
         }
         
         [HttpPost]
-        public async Task<PartialViewResult> AddKeyword(CreateArticleViewModel model)
+        public PartialViewResult AddKeyword(CreateArticleViewModel model)
         {
             if (!model.Keywords.Contains(model.Keyword))
             {

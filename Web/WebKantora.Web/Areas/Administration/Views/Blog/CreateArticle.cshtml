@@ -51,7 +51,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default my-inline" value="Submit">Добави</button>
+            <button type="submit" class="btn btn-default my-inline" id="add-keyword" value="Submit">Добави</button>
         </div>
     </div>
 </form>
@@ -59,7 +59,7 @@
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="~/js/autocompleteKeywords.js"></script>
+    <script src="~/js/removeKeyword.js"></script>
+    <script>autocompleteKeywords(@Json.Serialize(Model.AllKeywords))</script>
 }
-
-<script src="~/js/autocompleteKeywords.js" asp-append-version="true"></script>
-<script>autocompleteKeywords(@Json.Serialize(Model.AllKeywords))</script>

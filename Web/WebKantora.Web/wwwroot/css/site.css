@@ -103,3 +103,9 @@ ul.pager>li>a{
 .my-inline{
     display: inline;
 }
+
+.dc-holder>img{
+    background-color: rgba(0,0,0,0.8);
+    width: 60px;
+    margin-bottom: 5px;
+}
