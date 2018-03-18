@@ -9,6 +9,7 @@ using WebKantora.Web.Infrastructure.Mappings;
 using WebKantora.Services.Data.Contracts;
 using WebKantora.Web.Models.ArticleViewModels;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace WebKantora.Web.Controllers
 {
@@ -26,17 +27,17 @@ namespace WebKantora.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(int page = 1)
+        public ActionResult Index(int page = 1)
         {
             // Keyword[] parameter
-            if (!cache.TryGetValue("ArticlesCache", out IQueryable<ArticleViewModel> cacheEntry))
+            if (!cache.TryGetValue("ArticlesCache", out ICollection<ArticleViewModel> cacheEntry))
             {
                 cacheEntry = this.articlesService.GetAll()
-                .To<ArticleViewModel>();
+                .To<ArticleViewModel>().ToList();
 
                 cache.Set("ArticlesCache", cacheEntry);
             }
-            var viewModel = cacheEntry.ToPagedList(page, 5);
+            var viewModel = cacheEntry.AsQueryable().ToPagedList(page, 5);
             return this.View(viewModel);
         }
 
