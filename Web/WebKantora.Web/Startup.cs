@@ -54,9 +54,9 @@ namespace WebKantora.Web
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddDomainServices();
             services.AddRepositoryServices();
-
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
+            services.AddMemoryCache();
             services.AddAutoMapper();
             services.AddMvc();
             services.AddSession();

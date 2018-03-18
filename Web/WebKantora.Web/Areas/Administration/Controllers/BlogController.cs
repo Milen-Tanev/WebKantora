@@ -1,14 +1,16 @@
+using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+
 using WebKantora.Web.Infrastructure;
 using WebKantora.Web.Areas.Administration.Models.BlogViewModels;
-using AutoMapper;
 using WebKantora.Services.Data.Contracts;
 using WebKantora.Data.Models;
-using System.Collections.Generic;
 
 namespace WebKantora.Web.Areas.Administration.Controllers
 {
@@ -20,6 +22,7 @@ namespace WebKantora.Web.Areas.Administration.Controllers
         private IArticlesService articlesService;
         private IKeywordsService keywordsService;
         private IKeywordArticlesService keywordArticlesService;
+        private IMemoryCache cache;
         private IMapper mapper;
 
         public BlogController(
@@ -27,12 +30,14 @@ namespace WebKantora.Web.Areas.Administration.Controllers
             IArticlesService articlesService,
             IKeywordsService keywordsService,
             IKeywordArticlesService keywordArticlesService,
+            IMemoryCache cache,
             IMapper mapper)
         {
             this.usersService = usersService;
             this.articlesService = articlesService;
             this.keywordsService = keywordsService;
             this.keywordArticlesService = keywordArticlesService;
+            this.cache = cache;
             this.mapper = mapper;
         }
 
@@ -109,9 +114,10 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                         article.KeywordArticles.Add(newKeywordArticle);
                     }
 
-                    
+                    this.cache.Remove("ArticlesCache");
+
                     await this.articlesService.Add(article);
-                    
+
                     /// Adds collection of keywordsArticles
                     //await this.keywordArticlesService.Add(keywordsArticles);
 

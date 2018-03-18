@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System;
+using System.Threading.Tasks;
 using PagedList.Core;
 
 using WebKantora.Web.Infrastructure.Mappings;
 using WebKantora.Services.Data.Contracts;
 using WebKantora.Web.Models.ArticleViewModels;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace WebKantora.Web.Controllers
 {
@@ -14,20 +16,27 @@ namespace WebKantora.Web.Controllers
     {
         private IArticlesService articlesService;
         private IMapper mapper;
+        private IMemoryCache cache;
 
-        public BlogController(IArticlesService articlesService, IMapper mapper)
+        public BlogController(IArticlesService articlesService, IMapper mapper, IMemoryCache cache)
         {
             this.articlesService = articlesService;
             this.mapper = mapper;
+            this.cache = cache;
         }
 
         [HttpGet]
-        public ActionResult Index(int page = 1)
+        public async Task<ActionResult> Index(int page = 1)
         {
             // Keyword[] parameter
-            var viewModel = this.articlesService.GetAll()
-                .To<ArticleViewModel>().ToPagedList(page, 5);
-            
+            if (!cache.TryGetValue("ArticlesCache", out IQueryable<ArticleViewModel> cacheEntry))
+            {
+                cacheEntry = this.articlesService.GetAll()
+                .To<ArticleViewModel>();
+
+                cache.Set("ArticlesCache", cacheEntry);
+            }
+            var viewModel = cacheEntry.ToPagedList(page, 5);
             return this.View(viewModel);
         }
 
