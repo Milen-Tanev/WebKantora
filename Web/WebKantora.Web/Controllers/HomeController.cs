@@ -39,6 +39,7 @@ namespace WebKantora.Web.Controllers
             return View();
         }
 
+        [Route("/Home/Error")]
         public IActionResult Error()
         {
             return View();

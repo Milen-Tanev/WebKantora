@@ -74,6 +74,8 @@ namespace WebKantora.Web
 
             if (env.IsDevelopment())
             {
+                //app.UseExceptionHandler("/Home/Error");
+                //app.UseStatusCodePagesWithRedirects("/Home/Error");
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
@@ -81,6 +83,7 @@ namespace WebKantora.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePagesWithRedirects("/Home/Error");
             }
 
             app.UseStaticFiles();
