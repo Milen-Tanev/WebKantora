@@ -12,6 +12,10 @@
     <UserSecretsId>aspnet-WebKantora.Web-fee34001-b87c-4632-93f4-ef2b46076a66</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Views\Articles\**" />
     <Content Remove="Views\Articles\**" />
@@ -20,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastructure\Extensions\ControllerExtensions.cs" />
     <Compile Remove="Infrastructure\Extensions\RepositoryCollectionExtensions.cs" />
   </ItemGroup>
 
@@ -56,6 +61,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
     <PackageReference Include="NETCore.MailKit" Version="1.1.1" />
     <PackageReference Include="PagedList.Core.Mvc" Version="1.0.1" />
+    <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.1" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />

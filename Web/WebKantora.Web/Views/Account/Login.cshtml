@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Authentication
 @using WebKantora.Data.Models
+
 @model LoginViewModel
 @inject SignInManager<User> SignInManager
 
@@ -14,6 +15,7 @@
     <div class="col-md-8">
         <section>
             <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                @*<recaptcha />*@
                 <h4>Use a local account to log in.</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
@@ -89,5 +91,7 @@
 </div>
 
 @section Scripts {
+    @*<recaptcha-script />*@
+
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

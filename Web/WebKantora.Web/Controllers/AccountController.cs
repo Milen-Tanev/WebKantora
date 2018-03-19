@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using WebKantora.Web.Models.AccountViewModels;
 using WebKantora.Web.Services;
 using WebKantora.Data.Models;
+using PaulMiami.AspNetCore.Mvc.Recaptcha;
 
 namespace WebKantora.Web.Controllers
 {
@@ -55,6 +56,7 @@ namespace WebKantora.Web.Controllers
 
         //
         // POST: /Account/Login
+        //[ValidateRecaptcha]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -148,6 +150,7 @@ namespace WebKantora.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
+
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");

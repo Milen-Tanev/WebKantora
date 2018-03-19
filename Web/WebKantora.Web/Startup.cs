@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
+using PaulMiami.AspNetCore.Mvc.Recaptcha;
 using WebKantora.Data;
 using WebKantora.Data.Common;
 using WebKantora.Data.Common.Contracts;
@@ -61,6 +61,11 @@ namespace WebKantora.Web
             services.AddAutoMapper();
             services.AddMvc();
             services.AddSession();
+            services.AddRecaptcha(new RecaptchaOptions
+                {
+                    SiteKey = Configuration["Recaptcha:SiteKey"],
+                    SecretKey = Configuration["Recaptcha:SecretKey"]
+                });
             // Add application services.
             services.AddTransient<IEmailSenderService, EmailSenderService>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
