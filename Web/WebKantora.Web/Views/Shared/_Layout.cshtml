@@ -20,6 +20,29 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="icon" type="image/png" href="~/images/favicon.png" />
     @Html.Raw(JavaScriptSnippet.FullScript)
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#d6cfcf"
+                    },
+                    "button": {
+                        "background": "#3d3434"
+                    }
+                },
+                "theme": "classic",
+                "content": {
+                    "message": "Този сайт използва бисквитки(cookies).",
+                    "dismiss": "Съгласен съм",
+                    "link": "Научи повече",
+                    "href": "www.webkantora.bg/cookiespolicy"
+                }
+            })
+        });
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
