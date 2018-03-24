@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using WebKantora.Services.Web.Contracts;
-using WebKantora.Web.Models.ContactViewModels;
-using MimeKit;
 using WebKantora.Services.Data.Contracts;
-using System.Threading.Tasks;
+using AspNetSeo.CoreMvc;
 
 namespace WebKantora.Web.Controllers
 {
-    public class HomeController : Controller
+    [SeoBaseTitle("Уеб кантора - правни услуги онлайн")]
+    public class HomeController : BaseController
     {
         private IEmailSenderService emailSenderService;
         private IUsersService usersService;
@@ -23,22 +22,7 @@ namespace WebKantora.Web.Controllers
         {
             return View();
         }
-
-        public IActionResult About()
-        {
-            return View();
-        }
-
-        public IActionResult Blog()
-        {
-            return View();
-        }
-
-        public IActionResult Payment()
-        {
-            return View();
-        }
-
+        
         [Route("/Home/Error")]
         public IActionResult Error()
         {

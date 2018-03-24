@@ -9,11 +9,13 @@ using Microsoft.Extensions.Options;
 using WebKantora.Web.Models.ManageViewModels;
 using WebKantora.Web.Services;
 using WebKantora.Data.Models;
+using AspNetSeo.CoreMvc;
 
 namespace WebKantora.Web.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    [SeoBaseTitle("Уеб кантора - правни услуги онлайн")]
+    public class ManageController : BaseController
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;

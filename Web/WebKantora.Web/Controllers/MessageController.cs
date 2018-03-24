@@ -7,10 +7,12 @@ using WebKantora.Data.Models;
 using WebKantora.Services.Web.Contracts;
 using WebKantora.Services.Data.Contracts;
 using WebKantora.Web.Models.ContactViewModels;
+using AspNetSeo.CoreMvc;
 
 namespace WebKantora.Web.Controllers
 {
-    public class MessageController : Controller
+    [SeoBaseTitle("Уеб кантора - правни услуги онлайн")]
+    public class MessageController : BaseController
     {
         private IMessagesService messagesService;
         private IUsersService usersService;

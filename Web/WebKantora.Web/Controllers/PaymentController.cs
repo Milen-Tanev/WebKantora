@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using AspNetSeo.CoreMvc;
 
 namespace WebKantora.Web.Controllers
 {
-    public class PaymentController : Controller
+    [SeoBaseTitle("Уеб кантора - правни услуги онлайн")]
+    public class PaymentController : BaseController
     {
         public IActionResult Index()
         {

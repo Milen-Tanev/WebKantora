@@ -12,11 +12,13 @@ using WebKantora.Web.Models.AccountViewModels;
 using WebKantora.Web.Services;
 using WebKantora.Data.Models;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
+using AspNetSeo.CoreMvc;
 
 namespace WebKantora.Web.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    [SeoBaseTitle("Уеб кантора - правни услуги онлайн")]
+    public class AccountController : BaseController
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;

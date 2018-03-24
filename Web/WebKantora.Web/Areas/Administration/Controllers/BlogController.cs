@@ -1,3 +1,4 @@
+using AspNetSeo.CoreMvc;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace WebKantora.Web.Areas.Administration.Controllers
 {
     [Area("Administration")]
     [Authorize(Roles = "Admin")]
+    [SeoMetaRobotsNoIndex()]
     public class BlogController : Controller
     {
         private IUsersService usersService;

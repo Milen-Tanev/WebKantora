@@ -10,10 +10,12 @@ using WebKantora.Services.Data.Contracts;
 using WebKantora.Web.Models.ArticleViewModels;
 using System.Linq;
 using System.Collections.Generic;
+using AspNetSeo.CoreMvc;
 
 namespace WebKantora.Web.Controllers
 {
-    public class BlogController: Controller
+    [SeoBaseTitle("Уеб кантора - правни услуги онлайн")]
+    public class BlogController: BaseController
     {
         private IArticlesService articlesService;
         private IMapper mapper;
@@ -46,6 +48,12 @@ namespace WebKantora.Web.Controllers
         {
             var article = await this.articlesService.GetById(id);
             var viewModel = this.mapper.Map<FullArticleViewModel>(article);
+            var keywordArticles = article.KeywordArticles;
+
+            foreach (var ka in keywordArticles)
+            {
+                this.GetSeoHelper().AddMetaKeyword(ka.Keyword.Content);
+            }
 
             return this.View(viewModel);
         }

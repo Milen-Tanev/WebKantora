@@ -3,14 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebKantora.Web.Controllers
 {
-    [SeoBaseTitle("Уеб кантора")]
-    public class AboutController : Controller
+    [SeoBaseTitle("Уеб кантора - правни услуги онлайн")]
+    public class AboutController : BaseController
     {
-        [SeoTitle("")]
-        [SeoMetaDescription("")]
         public IActionResult Index()
         {
-            this.GetSeoHelper().Title = "";
+            this.GetSeoHelper().Title = "За нас";
             return View();
         }
     }
