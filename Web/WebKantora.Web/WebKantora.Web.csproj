@@ -32,6 +32,7 @@
     <Content Remove="Areas\Administration\Views\_AllKeywords.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AspNetSeo.CoreMvc" Version="0.8.1" />
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="2.0.1" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.8.1" />

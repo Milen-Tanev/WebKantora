@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AspNetSeo.CoreMvc;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -60,6 +61,8 @@ namespace WebKantora.Web
             services.AddMemoryCache();
             services.AddAutoMapper();
             services.AddMvc();
+
+            services.AddSeoHelper();
             services.AddSession();
             services.AddRecaptcha(new RecaptchaOptions
                 {

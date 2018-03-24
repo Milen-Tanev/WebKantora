@@ -16,6 +16,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="icon" type="image/png" href="~/images/favicon.png" />
     @Html.Raw(JavaScriptSnippet.FullScript)
@@ -34,9 +35,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">Какво правим</a></li>
+                    <li><a asp-area="" asp-controller="About" asp-action="Index">Какво правим</a></li>
                     <li><a asp-area="" asp-controller="Blog" asp-action="Index">Актуално</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Payment">Плащане</a></li>
+                    <li><a asp-area="" asp-controller="Payment" asp-action="Index">Плащане</a></li>
                     <li><a asp-area="" asp-controller="Message" asp-action="Index">Пишете ни</a></li>
                     @if (User.IsInRole("Admin"))
                     {
