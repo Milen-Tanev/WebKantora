@@ -1,4 +1,4 @@
-using AspNetSeo.CoreMvc;
+﻿using AspNetSeo.CoreMvc;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -133,15 +133,34 @@ namespace WebKantora.Web.Areas.Administration.Controllers
                 return View(model);
             }
         }
-        
+
         [HttpPost]
         public PartialViewResult AddKeyword(CreateArticleViewModel model)
         {
-            if (!model.Keywords.Contains(model.Keyword))
+            try
             {
-                model.Keywords.Add(model.Keyword);
+                if (!string.IsNullOrEmpty(model.Keyword))
+                {
+                    var keyword = model.Keyword.ToLower().Trim();
+                    if (!string.IsNullOrEmpty(keyword) && !model.Keywords.Contains(keyword))
+                    {
+                        model.Keywords.Add(keyword);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Keyword", "Ключовата дума вече е добавена към тази статия");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Keyword", "Невалидна стойност за ключова дума");
+                }
             }
-
+            catch(Exception ex)
+            {
+                //todo: save error in db
+            }
+            model.Keyword = null;
             return PartialView("_AllKeywords", model);
         }
         /*
