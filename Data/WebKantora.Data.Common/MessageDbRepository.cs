@@ -15,22 +15,6 @@ namespace WebKantora.Data.Common
         {
         }
 
-        public WebKantoraDbContext Context { get; }
-
-        public DbSet<Message> DbSet { get; }
-
-        public async Task Add(Message entity)
-        {
-            await this.DbSet.AddAsync(entity);
-        }
-
-        public IQueryable<Message> All()
-        {
-            return this.DbSet.
-                Where(x => !x.IsDeleted)
-                .AsNoTracking();
-        }
-
         protected override IQueryable<Message> Include(IQueryable<Message> entity)
         {
             return entity;
