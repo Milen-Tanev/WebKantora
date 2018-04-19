@@ -8,12 +8,11 @@ using WebKantora.Data.Models;
 
 namespace WebKantora.Data.Common
 {
-    public class MessageDbRepository : IMessageDbRepository
+    public class MessageDbRepository : DbRepository<Message>, IMessageDbRepository
     {
         public MessageDbRepository(WebKantoraDbContext context)
+            : base(context)
         {
-            this.Context = context;
-            this.DbSet = this.Context.Set<Message>();
         }
 
         public WebKantoraDbContext Context { get; }
@@ -27,24 +26,14 @@ namespace WebKantora.Data.Common
 
         public IQueryable<Message> All()
         {
-            return this.DbSet.AsNoTracking();
+            return this.DbSet.
+                Where(x => !x.IsDeleted)
+                .AsNoTracking();
         }
 
-        public async Task Delete(Guid id)
+        protected override IQueryable<Message> Include(IQueryable<Message> entity)
         {
-            var entity = await this.GetById(id);
-            entity.IsDeleted = true;
-        }
-
-        public async Task<Message> GetById(Guid id)
-        {
-            return await this.DbSet
-                .FirstOrDefaultAsync(e => e.Id == id);
-        }
-
-        public void Update(Guid id, Message entity)
-        {
-            this.DbSet.Update(entity);
+            return entity;
         }
     }
 }

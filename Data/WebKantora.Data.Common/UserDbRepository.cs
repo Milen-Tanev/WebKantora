@@ -26,7 +26,8 @@ namespace WebKantora.Data.Common
 
         public IQueryable<User> All()
         {
-            return this.DbSet.AsQueryable();
+            return this.DbSet.AsQueryable()
+                .Where(x => !x.IsDeleted);
         }
 
         public async Task Delete(string id)
@@ -38,6 +39,7 @@ namespace WebKantora.Data.Common
         public async Task<User> GetById(string id)
         {
             return await this.DbSet
+                .Where(x => !x.IsDeleted)
                 .Include(e => e.Messages)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
@@ -45,6 +47,7 @@ namespace WebKantora.Data.Common
         public async Task<User> GetByUserName(string userName)
         {
             return await this.DbSet
+                .Where(x => !x.IsDeleted)
                 .Include(e => e.Messages)
                 .FirstOrDefaultAsync(e => e.UserName == userName);
         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 using WebKantora.Data.Models.Contracts;
-using System;
 
 namespace WebKantora.Data.Models
 {
