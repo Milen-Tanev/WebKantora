@@ -9,13 +9,9 @@ namespace WebKantora.Web.Controllers
     [SeoBaseTitle("Уеб кантора - правни услуги онлайн")]
     public class HomeController : BaseController
     {
-        private IEmailSenderService emailSenderService;
-        private IUsersService usersService;
 
-        public HomeController(IEmailSenderService emailSenderService, IUsersService usersService)
+        public HomeController()
         {
-            this.emailSenderService = emailSenderService;
-            this.usersService = usersService;
         }
 
         public IActionResult Index()

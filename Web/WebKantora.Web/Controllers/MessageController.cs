@@ -8,6 +8,7 @@ using WebKantora.Services.Web.Contracts;
 using WebKantora.Services.Data.Contracts;
 using WebKantora.Web.Models.ContactViewModels;
 using AspNetSeo.CoreMvc;
+using System;
 
 namespace WebKantora.Web.Controllers
 {
@@ -36,20 +37,36 @@ namespace WebKantora.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var model = new ContactFormViewModel();
-
-            if (User.Identity.IsAuthenticated)
+            try
             {
-                var userName = this.HttpContext.User.Identity.Name;
-                var currentUser = await this.usersService.GetByUserName(userName);
+                var model = new ContactFormViewModel();
 
-                model.FirstName = currentUser.FirstName;
-                model.LastName = currentUser.LastName;
-                model.Email = currentUser.Email;
-                model.PhoneNumber = currentUser.PhoneNumber;
+                if (User.Identity.IsAuthenticated)
+                {
+                    var userName = this.HttpContext.User.Identity.Name;
+                    var currentUser = await this.usersService.GetByUserName(userName);
+
+                    model.FirstName = currentUser.FirstName;
+                    model.LastName = currentUser.LastName;
+                    model.Email = currentUser.Email;
+                    model.PhoneNumber = currentUser.PhoneNumber;
+                }
+                return View(model);
             }
+            catch(Exception ex)
+            {
+                var error = new CustomError()
+                {
+                    InnerException = "",
+                    Message = ex.Message,
+                    Source = ex.Source,
+                    StackTrace = ex.StackTrace,
+                    CustomMessage = ""
+                };
 
-            return View(model);
+                await this.customErrors.Add(error);
+                return this.View();
+            }
         }
 
         [HttpPost]
