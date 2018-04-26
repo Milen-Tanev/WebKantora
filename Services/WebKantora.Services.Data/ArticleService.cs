@@ -48,7 +48,7 @@ namespace WebKantora.Services.Data
                 .Where(a => a.KeywordArticles.Any(x => x.KeywordId == keywordId))
                 .Include(e => e.Author)
                 .Include(e => e.KeywordArticles)
-                    .ThenInclude(keywordArticles => keywordArticles.Keyword); ;
+                    .ThenInclude(keywordArticles => keywordArticles.Keyword);
 
             return articles;
         }
