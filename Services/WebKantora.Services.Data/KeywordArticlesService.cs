@@ -9,7 +9,7 @@ namespace WebKantora.Services.Data
 {
     public class KeywordArticlesService : IKeywordArticlesService
     {
-        private IKeywordArticleDbRepository keywordArticles;
+        private IWebKantoraDbRepository<KeywordArticle> keywordArticles;
         private IUnitOfWork unitOfWork;
 
         public KeywordArticlesService(IKeywordArticleDbRepository keywordArticles, IUnitOfWork unitOfWork)

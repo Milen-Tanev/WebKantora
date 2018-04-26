@@ -15,14 +15,15 @@ namespace WebKantora.Web.Controllers
     [SeoBaseTitle("Уеб кантора - правни услуги онлайн")]
     public class MessageController : BaseController
     {
-        private IMessagesService messagesService;
-        private IUsersService usersService;
+        private IMessageService messagesService;
+        private IUserService usersService;
         private IEmailSenderService emailSenderService;
         private ICustomErrorService customErrors;
         private IMapper mapper;
-
-        public MessageController(IMessagesService messagesService,
-            IUsersService usersService,
+        
+        public MessageController(
+            IMessageService messagesService,
+            IUserService usersService,
             IEmailSenderService emailSenderService,
             ICustomErrorService customErrors,
             IMapper mapper)

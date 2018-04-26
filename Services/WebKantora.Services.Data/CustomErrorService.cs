@@ -9,13 +9,13 @@ namespace WebKantora.Services.Data
 {
     public class CustomErrorService : ICustomErrorService
     {
-        private ICustomErrorDbRepository customErrors;
+        private IWebKantoraDbRepository<CustomError> customErrors;
         private IUnitOfWork unitOfWork;
 
-        public CustomErrorService(ICustomErrorDbRepository customErrors, IUnitOfWork unitOfWork)
+        public CustomErrorService(IWebKantoraDbRepository<CustomError> customErrors, IUnitOfWork unitOfWork)
         {
-            this.customErrors = customErrors;
-            this.unitOfWork = unitOfWork;
+            this.customErrors = customErrors ?? throw new ArgumentNullException("The custom errors Db repository cannot be null.");
+            this.unitOfWork = unitOfWork ?? throw new ArgumentNullException("The unit of work cannot be null.");
         }
 
         public async Task Add(CustomError customError)

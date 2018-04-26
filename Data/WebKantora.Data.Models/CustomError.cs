@@ -1,14 +1,15 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using WebKantora.Data.Models.Contracts;
 
 namespace WebKantora.Data.Models
 {
-    public class CustomError
+    public class CustomError : IEntity, IDeletable
     {
         public CustomError()
         {
             this.Id = Guid.NewGuid();
-            this.ThrowTIme = DateTime.UtcNow;
+            this.ThrowTime = DateTime.UtcNow;
         }
 
         [Key]
@@ -25,6 +26,9 @@ namespace WebKantora.Data.Models
         public string StackTrace { get; set; }
 
         [Required]
-        public DateTime ThrowTIme { get; private set; }
+        public DateTime ThrowTime { get; private set; }
+
+        [Required]
+        public bool IsDeleted { get; set; }
     }
 }

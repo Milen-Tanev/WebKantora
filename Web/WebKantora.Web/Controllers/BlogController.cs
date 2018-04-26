@@ -18,12 +18,12 @@ namespace WebKantora.Web.Controllers
     [SeoBaseTitle("Уеб кантора - правни услуги онлайн")]
     public class BlogController: BaseController
     {
-        private IArticlesService articlesService;
+        private IArticleService articlesService;
         private IMapper mapper;
         private IMemoryCache cache;
         private ICustomErrorService customErrors;
 
-        public BlogController(IArticlesService articlesService, IMapper mapper, IMemoryCache cache, ICustomErrorService customErrors)
+        public BlogController(IArticleService articlesService, IMapper mapper, IMemoryCache cache, ICustomErrorService customErrors)
         {
             this.articlesService = articlesService;
             this.mapper = mapper;
@@ -61,7 +61,6 @@ namespace WebKantora.Web.Controllers
                 await this.customErrors.Add(error);
                 return this.View();
             }
-
         }
 
         [HttpGet]

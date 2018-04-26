@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 using WebKantora.Data.Models;
 
 namespace WebKantora.Data
 {
-    public class WebKantoraDbContext : IdentityDbContext<User>
+    public class WebKantoraDbContext : IdentityDbContext<User, Role, Guid>
     {
         public WebKantoraDbContext(DbContextOptions<WebKantoraDbContext> options)
             : base(options)

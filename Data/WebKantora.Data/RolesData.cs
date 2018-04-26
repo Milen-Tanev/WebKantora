@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
+using WebKantora.Data.Models;
 
 namespace WebKantora.Data
 {
@@ -9,13 +10,13 @@ namespace WebKantora.Data
     {
         private static readonly string[] roles = new[] { "User", "Admin" };
 
-        public static async Task SeedRoles(RoleManager<IdentityRole> roleManager)
+        public static async Task SeedRoles(RoleManager<Role> roleManager)
         {
             foreach (var role in roles)
             {
                 if (!await roleManager.RoleExistsAsync(role))
                 {
-                    var create = await roleManager.CreateAsync(new IdentityRole(role));
+                    var create = await roleManager.CreateAsync(new Role() { Name = role});
 
                     if (!create.Succeeded)
                     {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,13 +31,13 @@ namespace WebKantora.Data.Common
                 .Where(x => !x.IsDeleted);
         }
 
-        public async Task Delete(string id)
+        public async Task Delete(Guid id)
         {
             var entity = await this.GetById(id);
             entity.IsDeleted = true;
         }
 
-        public async Task<User> GetById(string id)
+        public async Task<User> GetById(Guid id)
         {
             return await this.DbSet
                 .Where(x => !x.IsDeleted)
@@ -52,7 +53,7 @@ namespace WebKantora.Data.Common
                 .FirstOrDefaultAsync(e => e.UserName == userName);
         }
 
-        public void Update(string id, User entity)
+        public void Update(Guid id, User entity)
         {
             this.DbSet.Update(entity);
         }

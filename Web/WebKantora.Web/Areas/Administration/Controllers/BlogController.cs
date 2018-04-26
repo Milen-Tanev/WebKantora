@@ -20,25 +20,22 @@ namespace WebKantora.Web.Areas.Administration.Controllers
     [SeoMetaRobotsNoIndex()]
     public class BlogController : Controller
     {
-        private IUsersService usersService;
-        private IArticlesService articlesService;
-        private IKeywordsService keywordsService;
-        private IKeywordArticlesService keywordArticlesService;
+        private IUserService usersService;
+        private IArticleService articlesService;
+        private IKeywordService keywordsService;
         private IMemoryCache cache;
         private IMapper mapper;
 
         public BlogController(
-            IUsersService usersService,
-            IArticlesService articlesService,
-            IKeywordsService keywordsService,
-            IKeywordArticlesService keywordArticlesService,
+            IUserService usersService,
+            IArticleService articlesService,
+            IKeywordService keywordsService,
             IMemoryCache cache,
             IMapper mapper)
         {
             this.usersService = usersService;
             this.articlesService = articlesService;
             this.keywordsService = keywordsService;
-            this.keywordArticlesService = keywordArticlesService;
             this.cache = cache;
             this.mapper = mapper;
         }

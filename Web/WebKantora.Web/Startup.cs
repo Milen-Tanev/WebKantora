@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
+using System;
 using WebKantora.Data;
 using WebKantora.Data.Common;
 using WebKantora.Data.Common.Contracts;
@@ -49,13 +50,13 @@ namespace WebKantora.Web
             services.AddDbContext<WebKantoraDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<WebKantoraDbContext>()
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<WebKantoraDbContext, Guid>()
                 .AddDefaultTokenProviders();
             
+            services.AddTransient(typeof(IWebKantoraDbRepository<>), typeof(WebKantoraDbRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddDomainServices();
-            services.AddRepositoryServices();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
             services.AddMemoryCache();
@@ -80,7 +81,7 @@ namespace WebKantora.Web
             IHostingEnvironment env,
             ILoggerFactory loggerFactory,
             WebKantoraDbContext context,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<Role> roleManager)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -124,7 +125,7 @@ namespace WebKantora.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            //DbInitializer.Initialize(context, app);
+            DbInitializer.Initialize(context, app);
         }
     }
 }

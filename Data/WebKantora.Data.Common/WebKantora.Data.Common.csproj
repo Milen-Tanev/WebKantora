@@ -9,7 +9,9 @@
     <Compile Remove="Contracts\IAbstractDbRepository.cs" />
     <Compile Remove="Contracts\ICustomErrorService.cs" />
     <Compile Remove="Contracts\IExceptionLogDbRepository.cs" />
+    <Compile Remove="Contracts\IUserDbRepository.cs" />
     <Compile Remove="CustomErrorService.cs" />
+    <Compile Remove="UserDbRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

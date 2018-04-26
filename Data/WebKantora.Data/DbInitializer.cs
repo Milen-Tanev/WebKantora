@@ -22,31 +22,14 @@ namespace WebKantora.Data
 
             var user = context.Users.FirstOrDefault();
 
+            if (user == null)
+            {
+                return;
+            }
+
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
-                //var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
-
-                //var administrationRole = "Admin";
-                //var userRole = "User";
-
-                //var roles = new[]
-                //{
-                //    administrationRole,
-                //    userRole
-                //};
-
-                //foreach (var r in roles)
-                //{
-                //    var role = roleManager.CreateAsync(new IdentityRole
-                //    {
-                //        Name = r
-                //    });
-                //    role.Wait();
-
-                //    var userR= userManager.AddToRoleAsync(user, administrationRole);
-                //    //userR.Wait();
-                //}
 
                 var keywords = new List<Keyword>();
                 for (int i = 0; i < 5; i++)

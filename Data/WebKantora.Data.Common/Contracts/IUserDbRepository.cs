@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 using WebKantora.Data.Models;
@@ -11,12 +12,12 @@ namespace WebKantora.Data.Common.Contracts
 
         IQueryable<User> All();
 
-        Task<User> GetById(string id);
+        Task<User> GetById(Guid id);
 
-        Task Delete(string id);
+        Task Delete(Guid id);
 
         Task<User> GetByUserName(string userName);
 
-        void Update(string id, User entity);
+        void Update(Guid id, User entity);
     }
 }
