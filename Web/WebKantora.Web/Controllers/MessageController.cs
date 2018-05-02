@@ -9,6 +9,7 @@ using WebKantora.Services.Data.Contracts;
 using WebKantora.Web.Models.ContactViewModels;
 using AspNetSeo.CoreMvc;
 using System;
+using WebKantora.Web.Models.CustomErrorViewModels;
 
 namespace WebKantora.Web.Controllers
 {
@@ -20,7 +21,7 @@ namespace WebKantora.Web.Controllers
         private IEmailSenderService emailSenderService;
         private ICustomErrorService customErrors;
         private IMapper mapper;
-        
+
         public MessageController(
             IMessageService messagesService,
             IUserService usersService,
@@ -54,7 +55,7 @@ namespace WebKantora.Web.Controllers
                 }
                 return View(model);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var error = new CustomError()
                 {
@@ -73,60 +74,63 @@ namespace WebKantora.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Send(ContactFormViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                string subject = $"Запитване от {model.FirstName} {model.LastName}";
-                string messageText = $"{model.FirstName} {model.LastName}\nemail: {model.Email}\nphone number: {model.PhoneNumber}\nmessage: {model.Content}";
-
-                var mimeMessage = new MimeMessage()
+                if (ModelState.IsValid)
                 {
-                    Subject = subject,
-                    Body = new TextPart("plain")
+                    string subject = $"Запитване от {model.FirstName} {model.LastName}";
+                    string messageText = $"{model.FirstName} {model.LastName}\nemail: {model.Email}\nphone number: {model.PhoneNumber}\nmessage: {model.Content}";
+
+                    var mimeMessage = new MimeMessage()
                     {
-                        Text = messageText
+                        Subject = subject,
+                        Body = new TextPart("plain")
+                        {
+                            Text = messageText
+                        }
+                    };
+
+                    var result = this.emailSenderService.SendEmailForUserRequest(mimeMessage);
+
+                    if (result)
+                    {
+                        TempData.Add("SuccessMessage", "Благодарим Ви за запитването!");
+
+                        var message = this.mapper.Map<Message>(model);
+
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            var user = await this.usersService.GetByUserName(User.Identity.Name);
+                            message.Author = user;
+                        }
+                        await this.messagesService.Add(message);
+
+                        return this.RedirectToAction("Index", "Home");
                     }
+                }
+
+                return this.View(model);
+            }
+            catch (Exception ex)
+            {
+                var error = new CustomError()
+                {
+                    InnerException = "стр",
+                    Message = ex.Message,
+                    Source = ex.Source,
+                    StackTrace = ex.StackTrace,
+                    CustomMessage = ""
                 };
 
-                var result = this.emailSenderService.SendEmailForUserRequest(mimeMessage);
+                await this.customErrors.Add(error);
 
-                if (result)
+                var errorModel = new CustomErrorViewModel()
                 {
-                    TempData.Add("SuccessMessage", "Благодарим Ви за запитването!");
+                    ErrorContent = "Възникна грешка при изпращането на Вашето съобщение. Моля, опитайте по-късно."
+                };
 
-                    var message = this.mapper.Map<Message>(model);
-
-                    if (User.Identity.IsAuthenticated)
-                    {
-                        var user = await this.usersService.GetByUserName(User.Identity.Name);
-                        message.Author = user;
-                    }
-                    try
-                    {
-                        await this.messagesService.Add(message);
-                    }
-                    catch (System.Exception ex)
-                    {
-                        var error = new CustomError()
-                        {
-                            InnerException = "стр",
-                            Message = ex.Message,
-                            Source = ex.Source,
-                            StackTrace = ex.StackTrace,
-                            CustomMessage = ""
-                        };
-
-                        await this.customErrors.Add(error);
-                    }
-
-                    return this.RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    return this.BadRequest();
-                }
+                return View(errorModel);
             }
-            
-            return this.View(model);
         }
     }
 }

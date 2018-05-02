@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using WebKantora.Web.Models.CustomErrorViewModels;
 
-using WebKantora.Services.Web.Contracts;
-using WebKantora.Services.Data.Contracts;
+using Microsoft.AspNetCore.Mvc;
 using AspNetSeo.CoreMvc;
 
 namespace WebKantora.Web.Controllers
@@ -20,9 +19,9 @@ namespace WebKantora.Web.Controllers
         }
         
         [Route("/Home/Error")]
-        public IActionResult Error()
+        public IActionResult Error(CustomErrorViewModel errorModel)
         {
-            return View();
+            return View(errorModel);
         }
     }
 }

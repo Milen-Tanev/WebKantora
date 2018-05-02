@@ -94,7 +94,7 @@ namespace WebKantora.Web
             if (env.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                app.UseStatusCodePagesWithRedirects("/Home/Error");
+                app.UseStatusCodePagesWithReExecute("/Home/Error");
                 //app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
