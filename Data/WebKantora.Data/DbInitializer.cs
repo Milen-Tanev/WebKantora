@@ -1,26 +1,28 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebKantora.Data.Models;
 
 namespace WebKantora.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(WebKantoraDbContext context, IApplicationBuilder app)
+        public static async Task Initialize(WebKantoraDbContext context, IApplicationBuilder app)
         {
-            context.Database.EnsureCreated();
+            await context.Database.EnsureCreatedAsync();
 
             if (context.Articles.Any() && context.Keywords.Any())
             {
                 return;
             }
 
-            var user = context.Users.FirstOrDefault();
+            var user = await context.Users.FirstOrDefaultAsync();
 
             if (user == null)
             {
@@ -41,7 +43,7 @@ namespace WebKantora.Data
                     keywords.Add(keyWord);
                 }
 
-                context.AddRange(keywords);
+                await context.AddRangeAsync(keywords);
 
                 var articles = new List<Article>();
 
@@ -65,8 +67,8 @@ namespace WebKantora.Data
                     articles.Add(article);
                 }
 
-                context.AddRange(articles);
-                context.SaveChanges();
+                await context.AddRangeAsync(articles);
+                await context.SaveChangesAsync();
 
                 var kas = new List<KeywordArticle>();
                 var random = new Random();
@@ -81,8 +83,8 @@ namespace WebKantora.Data
                     kas.Add(ka);
                 }
 
-                context.AddRange(kas);
-                context.SaveChanges();
+                await context.AddRangeAsync(kas);
+                await context.SaveChangesAsync();
             }
         }
     }

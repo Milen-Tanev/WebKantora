@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 
 using WebKantora.Data.Models;
@@ -12,6 +11,6 @@ namespace WebKantora.Services.Data.Contracts
 
         IQueryable<Keyword> GetAll();
 
-        Task Update(Guid Id, Keyword entity);
+        Task Update(Keyword entity);
     }
 }

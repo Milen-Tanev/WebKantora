@@ -20,16 +20,14 @@ namespace WebKantora.Services.Data
 
         public async Task<User> GetById(Guid id)
         {
-            var user = this.users.GetById(id)
+            return await this.users.GetById(id)
                 .Include(u => u.Messages)
                 .FirstOrDefaultAsync();
-            return await user;
         }
 
         public async Task<User> GetByUserName(string userName)
         {
-            var user = await this.users.GetAll().FirstOrDefaultAsync(u => u.UserName == userName);
-            return user;
+            return await this.users.GetAll().FirstOrDefaultAsync(u => u.UserName == userName);
         }
     }
 }

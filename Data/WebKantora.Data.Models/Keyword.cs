@@ -19,7 +19,7 @@ namespace WebKantora.Data.Models
         [Required]
         public string Content { get; set; }
 
-        public ICollection<KeywordArticle> KeywordArticles { get; set; }
+        public virtual ICollection<KeywordArticle> KeywordArticles { get; set; }
 
         [Required]
         public bool IsDeleted { get; set; }

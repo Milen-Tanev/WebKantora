@@ -12,6 +12,7 @@ using WebKantora.Web.Infrastructure;
 using WebKantora.Web.Areas.Administration.Models.BlogViewModels;
 using WebKantora.Services.Data.Contracts;
 using WebKantora.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebKantora.Web.Areas.Administration.Controllers
 {
@@ -84,7 +85,7 @@ namespace WebKantora.Web.Areas.Administration.Controllers
 
                     foreach (var keyword in keywords)
                     {
-                        var newKeyword = dbKeywords.Where(x => x.Content.ToLower() == keyword.ToLower()).FirstOrDefault();
+                        var newKeyword = await dbKeywords.Where(x => x.Content.ToLower() == keyword.ToLower()).FirstOrDefaultAsync();
 
                         if (newKeyword == null)
                         {

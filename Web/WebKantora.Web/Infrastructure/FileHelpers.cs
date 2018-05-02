@@ -23,9 +23,7 @@ namespace WebKantora.Web.Infrastructure
 
             if (property != null)
             {
-                var displayAttribute = property.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
-
-                if (displayAttribute != null)
+                if (property.GetCustomAttribute(typeof(DisplayAttribute)) is DisplayAttribute displayAttribute)
                 {
                     fieldDisplayName = $"{displayAttribute.Name} ";
                 }

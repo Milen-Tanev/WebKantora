@@ -10,7 +10,7 @@ namespace WebKantora.Data.Common
 
         public UnitOfWork(WebKantoraDbContext context)
         {
-            this.context = context;
+            this.context = context ?? throw new ArgumentNullException("The context cannot be null.");
         }
 
         public async Task Commit()
