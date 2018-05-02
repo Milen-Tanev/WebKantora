@@ -29,11 +29,11 @@ namespace WebKantora.Web.Controllers
             ICustomErrorService customErrors,
             IMapper mapper)
         {
-            this.messagesService = messagesService;
-            this.usersService = usersService;
-            this.emailSenderService = emailSenderService;
-            this.customErrors = customErrors;
-            this.mapper = mapper;
+            this.messagesService = messagesService ?? throw new ArgumentNullException("Messages service cannot be null.");
+            this.usersService = usersService ?? throw new ArgumentNullException("Users service cannot be null.");
+            this.emailSenderService = emailSenderService ?? throw new ArgumentNullException("EmailSender service cannot be null.");
+            this.customErrors = customErrors ?? throw new ArgumentNullException("CustomError service cannot be null.");
+            this.mapper = mapper ?? throw new ArgumentNullException("Mapper cannot be null.");
         }
 
         [HttpGet]
