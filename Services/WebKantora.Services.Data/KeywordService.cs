@@ -27,14 +27,12 @@ namespace WebKantora.Services.Data
 
         public IQueryable<Keyword> GetAll()
         {
-            var allKeywords = this.keywords.GetAll()
+            return this.keywords.GetAll()
                 .OrderByDescending(a => a.Content)
                 .Include(e => e.KeywordArticles);
-
-            return allKeywords;
         }
 
-        public async Task Update(Guid Id, Keyword entity)
+        public async Task Update(Keyword entity)
         {
             await this.keywords.Update(entity);
             await this.unitOfWork.Commit();

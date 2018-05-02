@@ -18,17 +18,17 @@ namespace WebKantora.Web.Controllers
     [SeoBaseTitle("Уеб кантора - правни услуги онлайн")]
     public class BlogController: BaseController
     {
-        private IArticleService articlesService;
+        private IArticleService articles;
         private IMapper mapper;
         private IMemoryCache cache;
         private ICustomErrorService customErrors;
 
-        public BlogController(IArticleService articlesService, IMapper mapper, IMemoryCache cache, ICustomErrorService customErrors)
+        public BlogController(IArticleService articles, IMapper mapper, IMemoryCache cache, ICustomErrorService customErrors)
         {
-            this.articlesService = articlesService;
-            this.mapper = mapper;
-            this.cache = cache;
-            this.customErrors = customErrors;
+            this.articles = articles ?? throw new ArgumentNullException("Articles service cannot be null.");
+            this.mapper = mapper ?? throw new ArgumentNullException("Mapper cannot be null.");
+            this.cache = cache ?? throw new ArgumentNullException("Cache cannot be null.");
+            this.customErrors = customErrors ?? throw new ArgumentNullException("CustomError service cannot be null.");
         }
 
         [HttpGet]
@@ -39,7 +39,7 @@ namespace WebKantora.Web.Controllers
                 // Keyword[] parameter
                 if (!cache.TryGetValue("ArticlesCache", out ICollection<ArticleViewModel> cacheEntry))
                 {
-                    cacheEntry = this.articlesService.GetAll()
+                    cacheEntry = this.articles.GetAll()
                     .To<ArticleViewModel>().ToList();
 
                     cache.Set("ArticlesCache", cacheEntry);
@@ -68,7 +68,7 @@ namespace WebKantora.Web.Controllers
         {
             try
             {
-                var article = await this.articlesService.GetById(id);
+                var article = await this.articles.GetById(id);
                 var viewModel = this.mapper.Map<FullArticleViewModel>(article);
                 var keywordArticles = article.KeywordArticles;
 
@@ -101,7 +101,7 @@ namespace WebKantora.Web.Controllers
         {
             try
             {
-                var viewModel = this.articlesService.GetByKeyword(keywordId)
+                var viewModel = this.articles.GetByKeyword(keywordId)
                     .To<ArticleViewModel>().ToPagedList(page, 2);
 
                 ViewBag.KeywordId = keywordId;

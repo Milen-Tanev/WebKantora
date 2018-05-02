@@ -15,7 +15,7 @@ namespace WebKantora.Data.Models
         [Key]
         public Guid Id { get; set; }
 
-        public User Author { get; set; }
+        public virtual User Author { get; set; }
 
         public string AuthorName { get; set; }
 

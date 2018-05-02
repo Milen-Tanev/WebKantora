@@ -23,34 +23,32 @@ namespace WebKantora.Services.Data
 
         public async Task<Article> GetById(Guid id)
         {
-            var article = await this.articles.GetById(id)
+            return await this.articles.GetById(id)
                 .Include(e => e.Author)
                 .Include(e => e.KeywordArticles)
                     .ThenInclude(keywordArticles => keywordArticles.Keyword)
                 .FirstOrDefaultAsync();
-            return article;
         }
 
         public IQueryable<Article> GetAll()
         {
-            var allArticles = this.articles.GetAll()
+            return this.articles.GetAll()
                 .OrderByDescending(a => a.Date)
                 .Include(e => e.Author)
                 .Include(e => e.KeywordArticles)
-                    .ThenInclude(keywordArticles => keywordArticles.Keyword);
-
-            return allArticles;
+                    .ThenInclude(keywordArticles => keywordArticles.Keyword)
+                .AsNoTracking();
         }
 
         public IQueryable<Article> GetByKeyword(Guid keywordId)
         {
-            var articles = this.articles.GetAll()
-                .Where(a => a.KeywordArticles.Any(x => x.KeywordId == keywordId))
+            return this.articles.GetAll()
+                .Where(a => a.KeywordArticles
+                    .Any(x => x.KeywordId == keywordId))
                 .Include(e => e.Author)
                 .Include(e => e.KeywordArticles)
-                    .ThenInclude(keywordArticles => keywordArticles.Keyword);
-
-            return articles;
+                    .ThenInclude(keywordArticles => keywordArticles.Keyword)
+                .AsNoTracking();
         }
 
         public async Task Add(Article article)

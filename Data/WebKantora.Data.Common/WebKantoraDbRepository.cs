@@ -17,7 +17,7 @@ namespace WebKantora.Data.Common
 
             if (this.DbSet == null)
             {
-                throw new NullReferenceException("The DbSet cannot be null");
+                throw new NullReferenceException("The DbSet cannot be null.");
             }
         }
 
